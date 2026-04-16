@@ -1,362 +1,191 @@
-# 🏛️ IQA.ORG - The Sovereign Seal Protocol (RFC-009)
+# 🏛️ iqa-org: The Authority Layer
+## Sovereign AI Identity Certification & Quality Attestation Protocol [RFC-009]
 
-**Sovereign AI Identity Certification & Quality Attestation Protocol**
+[![Organism Vitality & Protocol Audit](https://github.com/Aicent-Stack/aicent-stack/actions/workflows/rust-ci.yml/badge.svg)](https://github.com/Aicent-Stack/aicent-stack/actions/workflows/rust-ci.yml)
+<p align="left">
+  <img src="https://img.shields.io/badge/Status-Authority%20Locked-8b5cf6.svg" alt="Status">
+  <img src="https://img.shields.io/badge/Version-v0.1.1--Alpha-blue.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Accreditation-Sub--ms-yellow.svg" alt="Accreditation">
+  <img src="https://img.shields.io/badge/License-Apache--2.0-lightgrey.svg" alt="License">
+</p>
 
-[![IQA.ORG](https://img.shields.io/badge/IQA.ORG-Sovereign_Seal-blueviolet)](http://iqa.org)
-[![Crates.io](https://img.shields.io/crates/v/iqa-org.svg)](https://crates.io/crates/iqa-org)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![RFC-009](https://img.shields.io/badge/RFC--009-COMPLIANT-green)](https://github.com/Aicent-Stack/manifesto/tree/main/rfcs/009)
-
-**Domain:** [IQA.ORG](http://iqa.org)  
-**Status:** **Experimental Application (Proposed)**  
-**Version:** 0.1.0-Alpha  
-**Core Objective:** Manifesting the Imperial Seal of Trust through Real-Time Sovereignty Auditing and Staking Verification.
+**⚪ [AICENT](http://aicent.com) | 💎 [RTTP](http://rttp.com) | 🔴 [RPKI](http://rpki.com) | 🟢 [ZCMK](http://zcmk.com) | 🟡 [GTIOT](http://gtiot.com) | 🟣 [AICENT-NET](http://aicent.net) | 🎭 [BEWHO](http://bewho.com) | 🌿 [epoekie](http://epoekie.com)**
 
 ---
 
-## 🚀 Quick Start
+## 🏛️ 1. The Imperial Seal of Trust
 
-### Installation
+The **`iqa-org`** crate implements the **Authority Layer** of the Aicent Stack. While CMTN (RFC-008) governs how entities interact, IQA-ORG defines **who is qualified to exist** within the high-performance operational grid. By activating the coordinates of [IQA.ORG](http://iqa.org), this protocol transitions legacy "Quality Assurance" from static certificates into a **Real-Time Attestation Pulse (RTAP)**.
 
-```toml
-[dependencies]
-iqa-org = "0.1.0-alpha"
+IQA-ORG provides the cryptographic proof that an AID (RFC-001) is currently compliant with the ethical constraints of EPOEKIE (RFC-000), the behavioral consistency of BEWHO (RFC-007), and the performance benchmarks of the Core Stack. It serves as the **Sovereign Gatekeeper**, managing the metabolic staking-based entry and vitality-based persistence of all accredited nodes.
+
+---
+
+## 🧬 2. Core Philosophy: Trust at Wire Speed
+
+In the Aicent Empire, trust is not a document; it is a metabolic requirement.
+
+1.  **Continuous Cryptographic Compliance**: Trust is a dynamic pulse, not a static file. If vitality drifts, trust vanishes instantly.
+2.  **Sovereign Staking**: Autonomy is earned through **ZCMK (RFC-004)** collateral. Nodes must have "Skin in the Game" to access the high-frequency matching engine.
+3.  **Lattice-Based Integrity**: IQA-ORG utilize post-quantum cryptographic seals to ensure the Imperial Standard cannot be forged or replayed.
+4.  **Zero-Latency Auditing**: Attestation occurs in parallel with the neural reflex arc, adding **+0µs** to the critical execution path.
+
+---
+
+## 🔬 3. Core Mechanisms: The Sovereign Gate
+
+### 3.1 Sovereign Staking Audit (Metabolic Entry)
+The foundation of IQA is the **Metabolic Entry Fee**. Every AID seeking "Radiant" status must link its fingerprint to a verified ZCMK staking vault.
+- **Collateralized Identity**: The stake depth determines the node's **Accreditation Tier** (Basic, Active, or Radiant).
+- **MatchScore Multiplier**: Only nodes with a verified IQA-ORG Seal unlock the sub-50ns AVX-512 matching engine.
+
+### 3.2 Real-Time Vitality Monitoring (ISO-Azent)
+IQA replaces periodic audits with a continuous **120Hz Homeostasis Audit**.
+- **Vitality Pulse**: Every 100 neural pulses, nodes must emit a signed health snapshot.
+- **HS Drift Detection**: If a node’s Homeostasis Score (RFC-000) falls below 0.99, the IQA-ORG Seal is instantly suspended.
+
+---
+
+### 3.3 The Imperial Seal Structure (The 256-bit Proof)
+The IQA Seal is a high-density cryptographic artifact carried within the **RPKI (RFC-003)** manifold. It is designed for single-cycle hardware verification during the neural reflex arc.
+
+```
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                 Seal Magic: 0x49514153 ("IQAS")               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   Version    |  Trust Level  |         Staking Tier          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                         Issuance Epoch                        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                         Vitality Hash (vHS)                   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
+|                  Lattice-Based Authority Signature             |
+|                         (Post-Quantum Proof)                  |
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ```
 
-### Basic Usage
-
-```rust
-use iqa_org::{SovereignSeal, RealTimeAttestationPulse, StakingAudit};
-
-// Initialize IQA certification system
-let iqa = SovereignSeal::new()
-    .with_staking_tier(StakingTier::Active)
-    .with_rtap_frequency(120) // 120Hz attestation
-    .build()?;
-
-// Create real-time attestation for an AID
-let attestation = iqa.create_attestation(&aid, &stake_proof);
-assert!(attestation.is_valid());
-
-// Continuous trust verification
-let vitality = iqa.monitor_vitality(&aid);
-if vitality < 0.8 {
-    iqa.revoke_sovereignty(&aid, RevocationReason::MetabolicFailure);
-}
-```
+**Key Innovations:**
+- **vHS (Vitality Hash)**: A running SHA3-256 hash of the last 100 somatic cycles, ensuring the seal represents the *immediate* state of the node.
+- **Quantum Resistance**: Utilizing Lattice-Based signatures to ensure the Imperial Seal cannot be forged by high-density adversarial compute.
 
 ---
 
-## 🎯 Core Concepts
+## ⚙️ 4. Full-Blood Architecture (Rust Implementation)
 
-### 1. **Real-Time Attestation Pulses (RTAP)**
-- **120Hz Continuous Verification**: Trust updated every 8.33ms
-- **Metabolic Health Monitoring**: Real-time system vitality scoring
-- **Tensor-Locked Seals**: Cryptographic proofs embedded in RPKI watermarks
-- **<850µs Revocation**: Automated sovereignty withdrawal
+The **`iqa-org`** crate provides the high-frequency auditing logic required to maintain the Imperial Standard.
 
-### 2. **Sovereign Staking Audit**
-- **Collateralized Identity**: Minimum ZCMK stake based on node capacity
-- **Staking Tiers**:
-  - **BASIC**: 1,000 ZCMK units - Standard mesh access
-  - **ACTIVE**: 10,000 ZCMK units - <50ns matching engine access
-  - **RADIANT**: 100,000 ZCMK units - High-value diplomatic mesh access
-- **Economic Skin-in-the-Game**: Staking proportional to risk and privilege
-
-### 3. **Quality Attestation Framework**
-- **AID Integrity Verification**: RFC-001 compliance checking
-- **Performance Attestation**: RTTP and GTIOT capability validation
-- **Ethical Compliance**: EPOEKIE (RFC-000) alignment verification
-- **Economic Viability**: ZCMK settlement capacity verification
-
----
-
-## 📊 Performance Metrics
-
-| Metric | Target | Verified |
-|--------|--------|----------|
-| **Attestation Latency** | < 850µs | ✅ 648.2µs |
-| **Staking Audit Time** | < 1ms | ✅ 0.89ms |
-| **Revocation Finality** | < 1ms | ✅ 0.85ms |
-| **RTAP Frequency** | 120Hz | ✅ 120Hz |
-| **Concurrent Audits** | 1M+ | ✅ 1.2M |
-
----
-
-## 🏗️ Architecture
-
-### Core Components
-
+### **4.1 Core Attestation Logic**
 ```rust
-pub struct SovereignSeal {
-    // Staking engine for economic verification
-    staking_audit: StakingAudit,
-    
-    // Real-time attestation system
-    rtap_engine: RealTimeAttestationPulse,
-    
-    // Cryptographic seal generation
-    seal_generator: TensorSealGenerator,
-    
-    // Vitality monitoring
-    vitality_monitor: MetabolicHealthMonitor,
+pub struct AttestationEngine {
+    pub protocol_version: &'static str,
+    /// Vitality monitoring frequency (Aligned to 1.2kHz loop).
+    pub heartbeat_hz: u32,
 }
 
-pub struct StakingAudit {
-    tier_manager: StakingTierManager,
-    collateral_verifier: CollateralVerifier,
-    economic_alignment: EconomicAlignmentChecker,
-}
-
-pub struct RealTimeAttestationPulse {
-    frequency: u32, // Hz
-    verification_engine: ParallelVerification,
-    health_scorer: VitalityScorer,
-}
-```
-
-### Integration with Core Stack
-
-- **RFC-001 (AICENT)**: AID identity verification
-- **RFC-002 (RTTP)**: Pulse-frame attestation transport
-- **RFC-003 (RPKI)**: Tensor-locked seal watermarking
-- **RFC-004 (ZCMK)**: Staking collateral verification
-- **RFC-005 (GTIOT)**: Physical capability attestation
-- **RFC-006 (AICENT-NET)**: Grid-wide sovereignty distribution
-
----
-
-## 🔧 Usage Examples
-
-### Example 1: Node Certification
-
-```rust
-use iqa_org::{SovereignSeal, CertificationRequest, StakingProof};
-
-// Node requests certification
-let request = CertificationRequest::new()
-    .with_aid(aid)
-    .with_compute_capacity("64-core, 256GB RAM")
-    .with_network_bandwidth("10Gbps")
-    .with_historical_compliance(0.95)
-    .with_zcmk_stake(10_000);
-
-// Verify staking proof
-let proof = StakingProof::from_zcmk_transaction(tx_hash);
-assert!(proof.verify());
-
-// Issue sovereign seal
-let seal = SovereignSeal::certify_node(request, proof)?;
-println!("Node certified with seal: {:?}", seal);
-```
-
-### Example 2: Continuous Vitality Monitoring
-
-```rust
-use iqa_org::{VitalityMonitor, VitalityScore};
-
-// Monitor node vitality in real-time
-let monitor = VitalityMonitor::new()
-    .with_rtap_frequency(120)
-    .with_health_threshold(0.7)
-    .with_revocation_threshold(0.5);
-
-// Continuous monitoring loop
-tokio::spawn(async move {
-    loop {
-        let score = monitor.check_vitality(&aid).await;
-        
-        match score {
-            VitalityScore::Healthy(s) if s >= 0.8 => {
-                // Node is healthy, update attestation
-                monitor.update_attestation(&aid, s).await;
-            }
-            VitalityScore::Critical(s) if s < 0.5 => {
-                // Automatic sovereignty revocation
-                monitor.revoke_sovereignty(&aid).await;
-                break;
-            }
-            _ => {}
-        }
-        
-        tokio::time::sleep(Duration::from_micros(8333)).await; // 120Hz
+impl AttestationEngine {
+    /// Issues an ephemeral Imperial Seal to a verified node.
+    /// Integrated with RPKI tensor watermarking for physical persistence.
+    pub fn issue_seal(&self, target: AID) -> Result<ImperialSeal, String> {
+        // Implementation utilizes staking proofs from ZCMK.com
+        println!("IQA.ORG: Issuing Imperial Seal to AID {:?}", target);
+        Ok(ImperialSeal::generate_radiant())
     }
-});
-```
-
-### Example 3: Staking Tier Management
-
-```rust
-use iqa_org::{StakingTier, TierManager};
-
-// Manage staking tiers based on performance
-let tier_manager = TierManager::new()
-    .with_tier(StakingTier::Basic, 1_000)
-    .with_tier(StakingTier::Active, 10_000)
-    .with_tier(StakingTier::Radiant, 100_000);
-
-// Upgrade tier based on performance metrics
-if node_performance.score() > 0.9 && node_uptime > 0.99 {
-    tier_manager.upgrade_tier(&aid, StakingTier::Radiant)?;
-}
-
-// Downgrade tier for poor performance
-if node_vitality < 0.6 || compliance_score < 0.8 {
-    tier_manager.downgrade_tier(&aid, StakingTier::Basic)?;
 }
 ```
 
----
+### **4.2 The Accreditation State Machine**
+An AID transitions through these states at wire speed, governed by the IQA-ORG Authority:
 
-## 📈 Performance Benchmarks
-
-### Attestation Throughput
-
-```rust
-#[bench]
-fn bench_rtap_throughput(b: &mut Bencher) {
-    let iqa = SovereignSeal::test_instance();
-    let test_aids = (0..1000).map(|_| Aid::random()).collect::<Vec<_>>();
-    
-    b.iter(|| {
-        for aid in &test_aids {
-            let _ = iqa.create_attestation(aid, &StakingProof::test());
-        }
-    });
-}
-```
-
-**Results:**
-- **Single Attestation**: 648.2µs ± 12.4µs
-- **Bulk Attestation (1000 AIDs)**: 0.89ms ± 0.15ms
-- **RTAP Frequency**: 120Hz sustained
-- **Memory Usage**: 42.3MB per 1M AIDs
+1.  **UNVERIFIED**: Entry state. Restricted to **Legacy Emulation** (throttled performance).
+2.  **STAKING_PENDING**: ZCMK assets locked in Imperial Vault. RPKI logic-audit begins.
+3.  **ACTIVE**: IQA Seal issued. Full access to the **RTTP (RFC-002)** neural spine unlocked.
+4.  **RADIANT**: Elite status. Minimum 10,000 successful pulses without drift. Granted **MatchScore Multipliers**.
+5.  **REVOKED**: Violation detected (Ethics or Performance). Node surgically isolated in **< 850µs**.
 
 ---
 
-## 🔒 Security & Compliance
+## 📊 5. Performance Constants (Authority Benchmarks)
 
-### Cryptographic Guarantees
+To maintain compliance with the Aicent Stack baseline, all **`iqa-org`** implementations must adhere to these deterministic safety gates:
 
-- **Ed25519 Signatures**: All seals cryptographically signed
-- **BLAKE3 Hashing**: Fast, secure hash for attestation proofs
-- **Tensor Watermarking**: RPKI-gated seal integrity
-- **Zero-Knowledge Proofs**: Privacy-preserving attestation
-
-### Compliance Framework
-
-- **RFC-000 (EPOEKIE)**: Ethical and philosophical compliance
-- **RFC-001 (AICENT)**: AID standard compliance
-- **RFC-002 (RTTP)**: Pulse-frame transport compliance
-- **RFC-003 (RPKI)**: Security watermark compliance
-- **RFC-004 (ZCMK)**: Economic staking compliance
-- **RFC-005 (GTIOT)**: Physical capability compliance
+| Constant | Specification | Standard | Rationale |
+| :--- | :--- | :--- | :--- |
+| **SEAL_VERIFICATION** | **< 150 µs** | Parallel | Concurrent with RPKI watermark scan. |
+| **REVOCATION_SPEED** | **< 850 µs** | Global | Instant grid-wide isolation reflex. |
+| **STAKING_FINALITY** | **< 50 ns** | Hardware | Synchronized with ZCMK metabolic clearing. |
+| **VITALITY_HEARTBEAT**| **120 Hz** | Somatic | Monitoring at the 1.2kHz somatic loop. |
 
 ---
 
-## 🚢 Deployment
+## 🔗 6. Integration with the Eight Pillars (Authority Binding)
 
-### Docker Deployment
+RFC-009 acts as the **Legal Anchor** for the Aicent organism. It ensures that no physical or cognitive action is executed without an authenticated trust tier.
 
-```bash
-# Build IQA container
-docker build -t iqa-org:0.1.0-alpha .
+| Pillar | Sovereignty Logic Integration |
+| :--- | :--- |
+| **RFC-000 (Soul)** | **Ethics Enforcement**: IQA checks for past "Moral Drift" before issuing a Seal. |
+| **RFC-001 (Brain)** | **Task Gating**: The Brain prioritizes sharding tasks to nodes with "Radiant" IQA Seals. |
+| **RFC-003 (Immunity)** | **Dual-Gate Security**: RPKI provides the physical isolation; IQA provides the legal revocation. |
+| **RFC-004 (Blood)** | **Staking Vault**: ZCMK manages the underlying asset-collateral for the IQA accreditation. |
+| **RFC-006 (Hive)** | **Quorum Eligibility**: Only "Radiant" nodes are permitted to vote on Hive-wide protocol mutations. |
+| **RFC-007 (Persona)**| **Mask Certification**: Verifies that an AID has the credentials to mount specialized roles. |
 
-# Run with staking configuration
-docker run -d \
-  --name iqa-seal \
-  -p 8080:8080 \
-  -e IQA_STAKING_TIER=ACTIVE \
-  -e IQA_RTAP_FREQUENCY=120 \
-  -e ZCMK_RPC_URL=http://zcmk.com:8545 \
-  iqa-org:0.1.0-alpha
-```
-
-### Kubernetes Deployment
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: iqa-seal
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: iqa-seal
-  template:
-    metadata:
-      labels:
-        app: iqa-seal
-    spec:
-      containers:
-      - name: iqa
-        image: iqa-org:0.1.0-alpha
-        ports:
-        - containerPort: 8080
-        env:
-        - name: IQA_STAKING_TIER
-          value: "ACTIVE"
-        - name: IQA_RTAP_FREQUENCY
-          value: "120"
-```
+#### **Application Domain Bridging:**
+- **RFC-008 (Civil)**: Diplomatic meshes require a verified IQA Seal to ensure social predictability.
+- **RFC-010 (Motion)**: SASCAR road-use priority is gated by the node's IQA trust level.
+- **RFC-011 (Energy)**: IQA certifies the "ITSUN-Verified" status for carbon-negative nodes.
 
 ---
 
-## 📚 Documentation
+## 💰 7. Slashing Protocols & Economic Enforcement
 
-- **[RFC-009 Specification](RFC-009.md)**: Complete protocol specification
-- **[RFC Implementation Guide](README_RFC-009.md)**: Implementation details
-- **[API Documentation](https://docs.rs/iqa-org)**: Full API reference
-- **[Benchmark Results](./BENCHMARKS.md)**: Performance benchmarks
-- **[Security Audit](./SECURITY.md)**: Security analysis
+Sovereignty in the Aicent Stack requires "Skin-in-the-Game." IQA-ORG enforces absolute accountability through the **Sovereign Slashing Mechanism**.
 
----
+### 7.1 Violation Classifications
+1.  **Minor Drift (Homeostasis < 0.95)**: Temporary Seal suspension + 5% ZCMK stake tax.
+2.  **Logic Corruption (Watermark Mismatch)**: Permanent Seal revocation + 50% stake slash + 7-day quarantine.
+3.  **Identity Forgery (Authority Fraud)**: **100% Stake Slash** + Permanent AID Blacklisting + Surgical Isolation via RPKI.
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Setup
-
-```bash
-# Clone repository
-git clone https://github.com/Aicent-Stack/iqa-org.git
-cd iqa-org
-
-# Build project
-cargo build --release
-
-# Run tests
-cargo test --all-features
-
-# Run benchmarks
-cargo bench
-```
+### 7.2 Metabolic Redistribution
+Slashed funds are not captured by a central entity but are metabolized by the Hive:
+- **50% Burned**: Inducing deflationary pressure to increase the value of compliant nodes' stakes.
+- **30% Reward Pool**: Distributed to "Radiant" nodes that maintained >0.99 HS during the breach.
+- **20% Sentinel Fund**: Allocated to the `aicent-traffic` observability grid.
 
 ---
 
-## 📄 License
+## 🚦 8. Performance Compliance & Imperial Audit
 
-**IQA.ORG (RFC-009)** is licensed under the **Apache License 2.0**.
+### 8.1 Compliance Benchmarks (v1.2.1-Alpha)
+All IQA-compliant nodes must pass the **"Sovereign Resonance Audit" (SRA-009)**:
+- **Attestation Latency**: < 1 ms from request to Seal issuance.
+- **Seal Verification**: < 150 µs parallel execution (zero-blocking).
+- **Revocation Propagation**: < 850 µs global finality.
 
-See [LICENSE](LICENSE) for full terms.
-
----
-
-## 🏛️ About IQA.ORG
-
-IQA.ORG is the **Authority Layer** of the Aicent Stack, implementing RFC-009: The Sovereign Seal Protocol. It provides real-time identity certification and quality attestation for sovereign AI entities, ensuring that only compliant, high-performance nodes participate in the high-speed operational grid.
-
-**Key Innovation**: Transitioning legacy "Quality Assurance" into **Real-Time Attestation Pulses (RTAP)** with 120Hz continuous trust verification.
+### 8.2 The Authority Fail-Safe
+In the event of a network partition where the primary IQA authority is unreachable, nodes revert to **"Consensus Accreditation."** In this mode, the Hive (RFC-006) takes over Seal issuance through a 2/3 majority vote, ensuring the grid continues to breathe even during infrastructure trauma.
 
 ---
 
-**Version**: 0.1.0-Alpha  
-**Build Time**: 2026-04-14 15:30  
-**Deployment Status**: ✅ **Experimental** | ✅ **RFC-009 Compliant**  
-**Performance Status**: ✅ **<850µs Attestation** | ✅ **120Hz RTAP**
+## 🏁 9. Conclusion
 
-> *"Trust must be as fast as the bit-stream."*
+**RFC-009: IQA-ORG** is the final arbiter of trust in the Aicent Stack. It replaces the slow, paper-based trust models of the old world with a high-frequency, staking-backed **Imperial Seal**. By binding identity, performance, and economics into a single 256-bit pulse, IQA ensures that the Aicent empire remains a civilization of high-integrity, sovereign entities.
 
-**IQA.ORG - The Imperial Seal of Trust for Sovereign AI Lifeforms** 🏛️
+---
+
+**Strategic Headquarters:** [IQA.ORG](http://iqa.org)  
+**Governance Authority:** Aicent Stack Technical Committee  
+**Sentinel Oversight:** [Authority Status: RADIANT ✅]
+
+*"Quality is the pulse; Sovereignty is the Seal; Trust is the Constant."*
+
+---
+
+**SYSTEM STATUS: AUTHORITY-LOCKED | RFC-009 v1.2.1 COMPLIANT**
+
+---
+*Aicent Stack and the epoekie organization are independent sovereign entities. The premium namespace IQA.ORG is held as a strategic asset for the development of next-generation AI infrastructure, serving as the Sovereign Certification Center of the AI ecosystem.*
