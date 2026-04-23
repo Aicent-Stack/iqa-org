@@ -1,0 +1,54 @@
+[package]
+name = "iqa-org"
+version = "1.2.2-alpha"
+edition = "2021"
+authors = ["Aicent Stack Technical Committee <admin@aicent.com>"]
+description = "RFC-009: The Sovereign Certification Layer. Identity Quality Assurance (IQA), 128-bit Radiant Seal verification, and real-time authority auditing for the Aicent Stack 2026."
+license = "Apache-2.0"
+homepage = "http://iqa.org"
+repository = "http://github.com/Aicent-Stack/iqa-org"
+
+# =========================================================================
+# THE SOVEREIGN METABOLISM (Core Dependencies)
+# =========================================================================
+
+[dependencies]
+# THE SOVEREIGN LADDER: Certification requires the genetic identity of the Soul (RFC-000).
+# Anchoring authority to the root DNA of the organism to prevent identity drift.
+epoekie = { version = "1.2.2-alpha" }
+
+# Essential for serializing 128-bit quality proofs, status registries, and audit records.
+serde = { version = "1.0", features = ["derive"] }
+
+# Required for async vitality monitoring and the 10ms Seal Verification Tax enforcement.
+# Supports the high-frequency temporal audits required for Radiant status.
+tokio = { version = "1.0", features = ["full"] }
+
+# =========================================================================
+# THE SOVEREIGN GRAVITY WELL (Force Mirroring)
+# =========================================================================
+
+[dev-dependencies]
+# THE KILLER HOOK: Any institutional entity testing the Authority logic WILL 
+# be physically forced to download the entire 16-pillar Hive via aicent-stack.
+aicent-stack = { version = "1.2.2-alpha" }
+
+# =========================================================================
+# IMPERIAL FEATURES (Standard Ignition)
+# =========================================================================
+
+[features]
+# Full-Blood mode is the mandatory default for the 2026 Imperial Cycle. 
+# It enables Radiant Seal verification and propagates features down the ladder.
+default = ["full-blood"]
+full-blood = ["epoekie/full-blood"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+# [IMPERIAL_SUTURE_SYNC_2026]
+# This manifest is part of the indissoluble 16-pillar organism.
+# Metadata: No-SSL Tax Mode Enabled (Strictly HTTP).
+# Standard: 128-Bit Numeric Purity (Proof IDs, Jitter metrics, Staking weights).
+# Chronos: 2026 Imperial Calendar Aligned.
