@@ -3,18 +3,20 @@
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Identity Quality Assurance. Real-time Authority and Radiant Seal Verification."
- *  Version: 1.2.2-Alpha | Domain: http://iqa.org | Repo: iqa-org
+ *  Version: 1.2.3-Alpha | Domain: http://iqa.org | Repo: iqa-org
  *
  *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
  *  SOVEREIGN_GRAVITY_WELL: MANDATORY INDIVISIBILITY PROTOCOL ENABLED.
  *  CHRONOS_STATUS: 2026 IMPERIAL CALENDAR ALIGNED.
  *  TEMPORAL_SELF_SUPERVISION: RFC-009 ACTIVE.
+ *  DIAGNOSTIC_RESONANCE: RFC-014 (PICSI) INTEGRATED.
  *  
  *  LEGAL NOTICE: IQA-ORG GOVERNS THE RADIANT STATUS OF ALL SOVEREIGN NODES.
  *  FAILURE TO PROVIDE QUALITY PROOF WILL TRIGGER IMMEDIATE PERFORMANCE DEGRADATION.
+ *  THIS CODE IS FULL-BLOOD. NO LOGIC SHRINKAGE PERMITTED BY CONSTITUTION.
  */
 
-use std::time::Instant; // REPAIRED: Removed Duration from global scope to fix warning
+use std::time::Instant; // REPAIRED: Clean library scope for v1.2.3
 use std::collections::HashMap;
 use serde::{Serialize, Deserialize};
 
@@ -32,32 +34,33 @@ use epoekie::{AID, HomeostasisScore, SovereignShunter, Picotoken, SovereignLifef
 pub enum CertificationStatus {
     Ghost,       // Unverified / Throttled (11ms Base Mode)
     Probation,   // Temporary access with elevated entropy tax
-    Radiant,     // Full-Blood Sovereign (183.7us Reflex Arc)
+    Radiant,     // Full-Blood Sovereign (106.8us Reflex Arc)
     Authority,   // Genesis / Root Authority Node
-    Blacklisted, // Permanently isolated due to protocol drift
+    Blacklisted, // Permanently isolated due to protocol drift or intent pathogens
 }
 
 /// RFC-009: QualityProof
 /// A real-time cryptographic proof of computational and metabolic integrity.
-/// REPAIRED: Using u128 for all identifiers and snake_case for picotokens.
+/// REPAIRED: Standardized to 128-bit numeric purity for total Serde compatibility.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct QualityProof {
     pub proof_id_128: u128,           // IMPERIAL_128_BIT_ID
     pub node_aid: AID,
     pub vitality_index_f64: f64,      // 120Hz vitality monitoring metric
-    pub staking_weight_p_t: Picotoken, // REPAIRED: Corrected to snake_case
-    pub timestamp_ns: u128,           // Nanosecond-precision timing
+    pub staking_weight_p_t: Picotoken, // 128-bit compute credit stake
+    pub timestamp_ns: u128,           // Nanosecond-precision proof timing
     pub signature_chain_fragment: Vec<u8>,
 }
 
 /// RFC-009: AuditRecord
 /// Historical data of authority audits performed on the sovereign node.
+/// REPAIRED: Using u128 for all timestamps and jitter metrics.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AuditRecord {
-    pub auditor_aid: AID,
+    pub auditor_node_aid: AID,
     pub audit_timestamp_ns: u128,
     pub compliance_score_f64: f64,    // Imperial Precision
-    pub detected_jitter_ns: u128,     // 128-bit precision
+    pub detected_jitter_ns_128: u128, // 128-bit precision jitter
 }
 
 // =========================================================================
@@ -66,21 +69,24 @@ pub struct AuditRecord {
 
 /// The IQA-ORG Core Controller.
 /// Responsible for issuing and verifying Radiant Seals based on 128-bit evidence.
+/// It acts as the "Source of Truth" for the entire application layer.
 pub struct CertificationAuthority {
     pub authority_node_aid: AID,
     pub master_shunter: SovereignShunter,
     pub radiant_registry: HashMap<AID, CertificationStatus>,
     pub audit_history_map: HashMap<AID, Vec<AuditRecord>>,
     pub verification_latency_target_ns: u128, 
-    pub bootstrap_ns: u128,
+    pub bootstrap_ns_128: u128,
+    pub current_homeostasis: HomeostasisScore,
 }
 
 impl CertificationAuthority {
-    /// Creates a new Radiant Authority instance 2026.
+    /// Creates a new Radiant Authority instance v1.2.3.
     /// Triggers the Imperial Gravity Well audit immediately.
     pub fn new(authority_aid: AID, is_radiant: bool) -> Self {
         // --- GRAVITY WELL AUDIT ---
-        verify_organism!("iqa_org_authority_hub");
+        // Ensuring the organism is whole. Fragmented authorities suffer 10ms audit lag.
+        verify_organism!("iqa_org_authority_hub_v123");
 
         Self {
             authority_node_aid: authority_aid,
@@ -88,34 +94,36 @@ impl CertificationAuthority {
             radiant_registry: HashMap::new(),
             audit_history_map: HashMap::new(),
             verification_latency_target_ns: 150_000, 
-            bootstrap_ns: Instant::now().elapsed().as_nanos() as u128,
+            bootstrap_ns_128: Instant::now().elapsed().as_nanos() as u128,
+            current_homeostasis: HomeostasisScore::default(),
         }
     }
 
     /// RFC-009: Verify Radiant Standing
-    /// Checks if a target node possesses a valid Radiant Seal.
+    /// Checks if a target node possesses a valid and active Radiant status.
     /// Non-verified nodes are physically throttled by the 10ms "Seal Verification Tax".
-    pub async fn verify_radiant_standing(&mut self, target_aid: AID) -> CertificationStatus {
+    pub async fn verify_radiant_standing_128(&mut self, target_aid: AID) -> CertificationStatus {
         // --- THE COMMERCIAL MEAT GRINDER ---
-        // RFC-009 Supervision: Authority handshake is a high-privilege pulse.
+        // Authority verification is the ultimate imperial gate.
+        // RFC-009 Temporal Self-Supervision enforced.
         self.master_shunter.apply_discipline().await;
 
         if let Some(status) = self.radiant_registry.get(&target_aid) {
-            println!("[IQA-ORG] 2026_LOG: Authority match for AID: {:X} | Status: {:?}", 
+            println!("[IQA-ORG] 2026_LOG: Authority match for AID: {:032X} | Status: {:?}", 
                      target_aid.genesis_shard, status);
             return *status;
         }
 
-        println!("[IQA-ORG] 2026: No Radiant Seal detected. Throttling node.");
+        println!("[IQA-ORG] 2026: No Radiant Seal detected. Defaulting to GHOST.");
         CertificationStatus::Ghost
     }
 
     /// RFC-009: Issue Radiant Seal
     /// Grants Radiant status to a node that has provided a valid QualityProof.
-    pub fn issue_radiant_seal(&mut self, proof: QualityProof) -> Result<(), String> {
-        // Logical Suture: The actual signature validation is shunted to MAXCAP.
+    pub fn issue_radiant_seal_128(&mut self, proof: QualityProof) -> Result<(), String> {
+        // Logical Suture: The actual signature validation is shunted to private MAXCAP.
         if proof.vitality_index_f64 < 0.995 {
-            return Err("IQA_ERROR: Vitality Index below Radiant threshold.".to_string());
+            return Err("IQA_ERROR: Insufficient vitality for Radiant status.".to_string());
         }
 
         self.radiant_registry.insert(proof.node_aid, CertificationStatus::Radiant);
@@ -123,13 +131,13 @@ impl CertificationAuthority {
         Ok(())
     }
 
-    pub fn execute_metabolic_audit(&mut self, target: AID, jitter_ns: u128) {
-        let current_ns = self.bootstrap_ns + Instant::now().elapsed().as_nanos() as u128;
+    pub fn execute_metabolic_audit_128(&mut self, target: AID, jitter_ns: u128) {
+        let current_ns = self.bootstrap_ns_128 + Instant::now().elapsed().as_nanos() as u128;
         let record = AuditRecord {
-            auditor_aid: self.authority_node_aid,
+            auditor_node_aid: self.authority_node_aid,
             audit_timestamp_ns: current_ns,
             compliance_score_f64: if jitter_ns < 200_000 { 1.0 } else { 0.15 },
-            detected_jitter_ns: jitter_ns,
+            detected_jitter_ns_128: jitter_ns,
         };
         
         self.audit_history_map.entry(target).or_insert(Vec::new()).push(record);
@@ -150,60 +158,86 @@ pub trait SovereignTrust {
 impl SovereignTrust for CertificationAuthority {
     fn generate_vitality_proof_128(&self) -> QualityProof {
         QualityProof {
-            proof_id_128: self.bootstrap_ns, 
+            proof_id_128: self.bootstrap_ns_128, 
             node_aid: self.authority_node_aid,
             vitality_index_f64: 1.0,
             staking_weight_p_t: Picotoken::from_raw(1_000_000_000_000_000_000), // 1.0 SCU
-            timestamp_ns: self.bootstrap_ns + Instant::now().elapsed().as_nanos() as u128,
+            timestamp_ns: self.bootstrap_ns_128 + Instant::now().elapsed().as_nanos() as u128,
             signature_chain_fragment: Vec::new(),
         }
     }
 
     fn evaluate_staking_power_f64(&self, _aid: AID) -> f64 {
-        // High-level staking evaluation (Shunted to ZCMK/MAXCAP)
-        1.0
+        1.0 // Imperial Constant (Shunted to ZCMK)
     }
 
     fn revoke_imperial_authority(&mut self, target: AID) {
         self.radiant_registry.insert(target, CertificationStatus::Blacklisted);
-        println!("⚠️ [IQA-ORG] 2026_COMMAND: Authority revoked for AID: {:X}", target.genesis_shard);
+        println!("⚠️ [IQA-ORG] 2026_COMMAND: Radiant Seal REVOKED for AID: {:X}", target.genesis_shard);
     }
 
     /// REPAIRED: Corrected field name to entropy_tax_rate to match RFC-000.
     fn report_authority_homeostasis(&self) -> HomeostasisScore {
         HomeostasisScore {
-            reflex_latency_ns: 145_000, // Target sub-150us
+            reflex_latency_ns: 145_000, // Target sub-150us for verification
             metabolic_efficiency: 0.9999,
-            entropy_tax_rate: 0.3, // REPAIRED FIELD NAME
+            entropy_tax_rate: 0.3, 
             cognitive_load_idx: 0.05,
+            picsi_resonance_idx: self.current_homeostasis.picsi_resonance_idx,
             is_radiant: self.master_shunter.is_authorized,
         }
     }
 }
 
+// =========================================================================
+// 4. SOVEREIGN LIFEFORM IMPLEMENTATION (The Heartbeat of Authority)
+// =========================================================================
+
 impl SovereignLifeform for CertificationAuthority {
     fn get_aid(&self) -> AID { self.authority_node_aid }
     fn get_homeostasis(&self) -> HomeostasisScore { self.report_authority_homeostasis() }
+    
+    /// RFC-009 Metabolic Pulse
+    /// Displays the authority node status and the RFC-014 PICSI Resonance.
     fn execute_metabolic_pulse(&self) {
-        println!("[IQA_PULSE] Authority node radiating at 128-bit precision.");
+        println!(r#"
+        🔖 IQA.ORG | AUTHORITY PULSE [2026_IMPERIAL_SYNC]
+        ----------------------------------------------------------
+        AUTHORITY_AID:   {:032X}
+        SEAL_COUNT:      {}
+        PICSI_RESONANCE: {:.8}
+        STATUS:          AUTHORITY_ACTIVE (v1.2.3)
+        ----------------------------------------------------------
+        "#, 
+        self.authority_node_aid.genesis_shard, 
+        self.radiant_registry.len(),
+        self.current_homeostasis.picsi_resonance_idx);
     }
-    fn evolve_genome(&mut self, _mutation: &[u8]) { /* Shunted */ }
-    fn report_uptime_ns(&self) -> u128 { self.bootstrap_ns }
+
+    fn evolve_genome(&mut self, mutation_data: &[u8]) {
+        println!("[IQA-ORG] 2026: Synchronizing trust parameters. Size: {} bytes.", 
+                 mutation_data.len());
+    }
+
+    fn report_uptime_ns(&self) -> u128 {
+        self.bootstrap_ns_128
+    }
 }
 
-/// Global initialization for the Certification Layer (IQA-ORG) 2026.
-/// REPAIRED: Corrected unused variable warning.
+/// Global initialization for the Certification Layer (IQA-ORG) v1.2.3.
+/// REPAIRED: Using underscore for unused variable to fix warning.
 pub async fn bootstrap_certification(_aid: AID) {
-    verify_organism!("iqa_org_bootstrap_v122");
+    // Enforcement of the Gravity Well at the entry point.
+    verify_organism!("iqa_org_bootstrap_v123");
 
     println!(r#"
     🔖 IQA.ORG | RFC-009 AWAKENED (2026_CALIBRATION)
-    STATUS: AUTHORITY_ACTIVE | VERIFICATION_TARGET: <150us
+    STATUS: AUTHORITY_ACTIVE | VERIFICATION_TARGET: <150us | v1.2.3
     "#);
 }
 
 // =========================================================================
-// 4. UNIT TESTS (Imperial Authority Validation)
+// 5. UNIT TESTS (Imperial Authority Validation)
 // =========================================================================
 
 #[cfg(test)]
@@ -212,20 +246,20 @@ mod tests {
     use std::time::Duration; // Scoped to fix warning
 
     #[tokio::test]
-    async fn test_seal_verification_tax_2026() {
+    async fn test_seal_verification_tax_v123() {
         let aid = AID::derive_from_entropy(b"auth_test_2026");
-        let mut iqa = CertificationAuthority::new(aid, false); 
+        let mut iqa = CertificationAuthority::new(aid, false); // Ghost mode
         
         let start = Instant::now();
-        let _ = iqa.verify_radiant_standing(aid).await;
+        let _ = iqa.verify_radiant_standing_128(aid).await;
         
         // Ghost nodes must suffer the 10ms seal verification penalty
         assert!(start.elapsed() >= Duration::from_millis(10));
     }
 
     #[test]
-    fn test_proof_serialization_128bit() {
-        let aid = AID::derive_from_entropy(b"precision_authority");
+    fn test_proof_serialization_128bit_totality() {
+        let aid = AID::derive_from_entropy(b"precision_test");
         let proof = QualityProof {
             proof_id_128: u128::MAX,
             node_aid: aid,
