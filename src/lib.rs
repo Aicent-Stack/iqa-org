@@ -3,7 +3,7 @@
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Identity Quality Assurance. Real-time Authority and Radiant Seal Verification."
- *  Version: 1.2.3-Alpha | Domain: http://iqa.org | Repo: iqa-org
+ *  Version: 1.2.5-Alpha | Domain: http://iqa.org | Repo: iqa-org
  *
  *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
  *  SOVEREIGN_GRAVITY_WELL: MANDATORY INDIVISIBILITY PROTOCOL ENABLED.
@@ -16,7 +16,7 @@
  *  THIS CODE IS FULL-BLOOD. NO LOGIC SHRINKAGE PERMITTED BY CONSTITUTION.
  */
 
-use std::time::Instant; // REPAIRED: Clean library scope for v1.2.3
+use std::time::Instant; // REPAIRED: Clean library scope for v1.2.5
 use std::collections::HashMap;
 use serde::{Serialize, Deserialize};
 
@@ -46,7 +46,7 @@ pub enum CertificationStatus {
 pub struct QualityProof {
     pub proof_id_128: u128,           // IMPERIAL_128_BIT_ID
     pub node_aid: AID,
-    pub vitality_index_f64: f64,      // 120Hz vitality monitoring metric
+    pub vitality_index_f64: f64,      // 1200Hz vitality monitoring metric
     pub staking_weight_p_t: Picotoken, // 128-bit compute credit stake
     pub timestamp_ns: u128,           // Nanosecond-precision proof timing
     pub signature_chain_fragment: Vec<u8>,
@@ -81,12 +81,12 @@ pub struct CertificationAuthority {
 }
 
 impl CertificationAuthority {
-    /// Creates a new Radiant Authority instance v1.2.3.
+    /// Creates a new Radiant Authority instance v1.2.5.
     /// Triggers the Imperial Gravity Well audit immediately.
     pub fn new(authority_aid: AID, is_radiant: bool) -> Self {
         // --- GRAVITY WELL AUDIT ---
         // Ensuring the organism is whole. Fragmented authorities suffer 10ms audit lag.
-        verify_organism!("iqa_org_authority_hub_v123");
+        verify_organism!("iqa_org_authority_hub_v125");
 
         Self {
             authority_node_aid: authority_aid,
@@ -206,7 +206,7 @@ impl SovereignLifeform for CertificationAuthority {
         AUTHORITY_AID:   {:032X}
         SEAL_COUNT:      {}
         PICSI_RESONANCE: {:.8}
-        STATUS:          AUTHORITY_ACTIVE (v1.2.3)
+        STATUS:          AUTHORITY_ACTIVE (v1.2.5)
         ----------------------------------------------------------
         "#, 
         self.authority_node_aid.genesis_shard, 
@@ -224,15 +224,15 @@ impl SovereignLifeform for CertificationAuthority {
     }
 }
 
-/// Global initialization for the Certification Layer (IQA-ORG) v1.2.3.
+/// Global initialization for the Certification Layer (IQA-ORG) v1.2.5.
 /// REPAIRED: Using underscore for unused variable to fix warning.
 pub async fn bootstrap_certification(_aid: AID) {
     // Enforcement of the Gravity Well at the entry point.
-    verify_organism!("iqa_org_bootstrap_v123");
+    verify_organism!("iqa_org_bootstrap_v125");
 
     println!(r#"
     🔖 IQA.ORG | RFC-009 AWAKENED (2026_CALIBRATION)
-    STATUS: AUTHORITY_ACTIVE | VERIFICATION_TARGET: <150us | v1.2.3
+    STATUS: AUTHORITY_ACTIVE | VERIFICATION_TARGET: <150us | v1.2.5
     "#);
 }
 
@@ -246,7 +246,7 @@ mod tests {
     use std::time::Duration; // Scoped to fix warning
 
     #[tokio::test]
-    async fn test_seal_verification_tax_v123() {
+    async fn test_seal_verification_tax_v125() {
         let aid = AID::derive_from_entropy(b"auth_test_2026");
         let mut iqa = CertificationAuthority::new(aid, false); // Ghost mode
         

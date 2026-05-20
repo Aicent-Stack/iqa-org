@@ -3,7 +3,7 @@
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Demonstrating Temporal Self-Supervision and 128-Bit Radiant Seal Issuance."
- *  Version: 1.2.3-Alpha | Domain: http://iqa.org | Repo: iqa-org
+ *  Version: 1.2.5-Alpha | Domain: http://iqa.org | Repo: iqa-org
  *
  *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
  *  SOVEREIGN_GRAVITY_WELL: MANDATORY INDIVISIBILITY PROTOCOL ENABLED.
@@ -24,7 +24,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     // Enforcement of the Gravity Well
     // Standalone execution demonstrates the 10ms Seal Verification Tax on Ghost nodes.
-    verify_organism!("iqa_org_authority_example_v123");
+    verify_organism!("iqa_org_authority_example_v125");
     bootstrap_certification(auth_aid).await;
 
     // 2. Initialize the Certification Authority

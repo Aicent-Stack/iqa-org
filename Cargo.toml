@@ -1,6 +1,6 @@
 [package]
 name = "iqa-org"
-version = "1.2.3-alpha"
+version = "1.2.5-alpha"
 edition = "2021"
 authors = ["Aicent Stack Technical Committee <admin@aicent.com>"]
 description = "RFC-009: The Sovereign Certification Layer. Identity Quality Assurance (IQA) and 128-bit Radiant Seal verification for the Aicent Stack 2026. Aligned with RFC-014 (PICSI)."
@@ -14,8 +14,8 @@ repository = "http://github.com/Aicent-Stack/iqa-org"
 
 [dependencies]
 # THE SOVEREIGN LADDER: Certification requires the genetic DNA of the Soul (RFC-000).
-# Anchoring authority to the v1.2.3 root DNA of the organism.
-epoekie = { version = "1.2.3-alpha" }
+# Anchoring authority to the v1.2.5 root DNA of the organism.
+epoekie = { version = "1.2.5-alpha" }
 
 # Essential for serializing 128-bit quality proofs, radiance status, and audit records.
 serde = { version = "1.0", features = ["derive"] }
@@ -31,7 +31,7 @@ tokio = { version = "1.0", features = ["full"] }
 [dev-dependencies]
 # THE KILLER HOOK: Re-activated for the GitHub Source Totality.
 # Forces any entity auditing the Authority logic to mirror the entire 17-pillar Hive.
-aicent-stack = { version = "1.2.3-alpha" }
+aicent-stack = { version = "1.2.5-alpha" }
 
 # =========================================================================
 # IMPERIAL FEATURES (Standard Ignition)
@@ -47,9 +47,9 @@ full-blood = ["epoekie/full-blood"]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
-# [IMPERIAL_SUTURE_SYNC_2026_v123]
+# [IMPERIAL_SUTURE_SYNC_2026_v125]
 # This manifest is part of the indissoluble 17-pillar organism.
 # Metadata: No-SSL Tax Mode Enabled (Strictly HTTP).
 # Standard: 128-Bit Numeric Purity (Jitter, Proof IDs, Finality).
 # Chronos: 2026 Imperial Calendar Aligned.
-# Repository Strategy: Active Gravity Well (v1.2.3 Totality).
+# Repository Strategy: Active Gravity Well (v1.2.5 Totality).
