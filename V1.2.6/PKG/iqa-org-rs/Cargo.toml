@@ -1,0 +1,36 @@
+[package]
+name = "iqa-org"
+version = "1.2.6-alpha"
+edition = "2021"
+authors = ["IQA.ORG Organization"]
+description = "IQA (Identity Quality Assurance) reference implementation in Rust: iqa:// subject-attestation addressing, IQA_ROUTE derivation, action safety classes, and the published conformance vectors that prove an implementation is right."
+license = "Apache-2.0"
+homepage = "https://iqa.org"
+repository = "https://github.com/Aicent-Stack/iqa-org"
+readme = "README.md"
+keywords = ["iqa", "attestation", "identity", "uri", "conformance"]
+categories = ["network-programming", "parser-implementations"]
+
+# ---------------------------------------------------------------------------
+# The core deliberately has NO dependencies. SHA-256 is implemented in-crate
+# (known-answer tested) and the conformance vectors are replayed through a
+# minimal in-crate JSON reader.
+#
+# This manifest is standalone: it does NOT depend on epoekie, aicent or the
+# aicent-stack orchestrator, and the crate is `#![forbid(unsafe_code)]`.
+# ---------------------------------------------------------------------------
+
+[dependencies]
+ed25519-dalek = { version = "2", optional = true, features = ["rand_core"] }
+getrandom = { version = "0.2", optional = true }
+
+[features]
+default = []
+# Sovereign attestation envelope (SPEC/IQA-URI-ATTEST-v1.2.6 §5, domain
+# prefix `iqa-attest-v1`) — optional, exactly like the `[ed25519]` extra of
+# the Python package. The default build stays zero-dependency; the envelope's
+# signing input and AID self-certification are replayed without it.
+ed25519 = ["dep:ed25519-dalek", "dep:getrandom"]
+
+[package.metadata.docs.rs]
+all-features = true
