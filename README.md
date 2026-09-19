@@ -11,6 +11,40 @@
 
 ---
 
+> ## 📌 Scope & version lineage
+>
+> The Aicent Stack's narrative, multi-pillar material — together with the public code that
+> accompanies it — is published **up to `V1.2.5`**.
+>
+> **`V1.2.6` is split out from that line.** It is dedicated to exactly two URI schemes: the
+> **two-pillar protocol**.
+>
+> | Pillar | Scheme | What the URI names | Specification |
+> | :--- | :--- | :--- | :--- |
+> | **Intent addressing** | `rttp` | a claim of intent directed at an identified subject | [RFC-002](https://rttp.com/RFC-002/) |
+> | **Verification / attestation** | `iqa` | the attestation standing of a subject, as reported by a named organ | [RFC-009](https://iqa.org/RFC-009/) |
+>
+> The two schemes are *two halves of one addressing model*: they resolve at the same layer
+> and are intended to be encodable at the same cost. The sibling repository is
+> [`Aicent-Stack/iqa-org`](https://github.com/Aicent-Stack/iqa-org).
+>
+> **Naming.** `iqa` here denotes **Identity Quality Assurance**. It is not the
+> computer-vision field of *Image Quality Assessment*, and it is not affiliated with the
+> historical UK *Institute of Quality Assurance* / Chartered Quality Institute.
+>
+> **Registration status (both schemes):** submitted to IANA under RFC 7595 — **Provisional,
+> under review, not registered** (`iqa` ticket `#1459963`, `rttp` ticket `#1459939`). A
+> ticket number is not a registration, and neither scheme is standardised.
+>
+> **Which document governs which question.** The scheme definition and its scope are
+> RFC-009 / RFC-002 together with the scope note
+> [`V1.2.6-DUAL-PILLAR.md`](https://github.com/Aicent-Stack/aicent-docs/blob/main/V1.2.6-DUAL-PILLAR.md).
+> Everything below this section is the Aicent Stack's narrative, retained as the other
+> line's material: **it is not part of the `iqa` scheme definition**, and no figure in it
+> — latency, jitter, ratio or node count — describes a property of the scheme.
+
+---
+
 # 🔖 RFC-009: IQA-ORG (The Imperial Authority)
 
 **The Sovereign Certification Layer of the Aicent Stack.**  
