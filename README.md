@@ -26,7 +26,7 @@
 >
 > The two schemes are *two halves of one addressing model*: they resolve at the same layer
 > and are intended to be encodable at the same cost. The sibling repository is
-> [`Aicent-Stack/iqa-org`](https://github.com/Aicent-Stack/iqa-org).
+> [`Aicent-Stack/rttp`](https://github.com/Aicent-Stack/rttp).
 >
 > **Naming.** `iqa` here denotes **Identity Quality Assurance**. It is not the
 > computer-vision field of *Image Quality Assessment*, and it is not affiliated with the
