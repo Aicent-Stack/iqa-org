@@ -1,0 +1,122 @@
+# CI for the IQA reference implementations (this repository).
+#
+# Why this file exists: every check count quoted in the READMEs, on the website
+# and in the reviewer brief must come from a CI run, never from someone's laptop.
+# Each job prints its toolchain version and the exact self-test summary line, and
+# asserts the expected count, so a stale number fails the build instead of
+# shipping.
+#
+# The Python and JavaScript jobs below install the published packages by name
+# (PyPI: iqa-org, npm: @aicent/iqa): they test what a reviewer actually gets
+# today, on a fresh machine, with no account.
+#
+# ---------------------------------------------------------------------------
+# RELEASE NOTE - asserted counts (measured 2026-09-21 against 1.2.8 / 1.2.8-alpha):
+#     iqa     default 75 (3 skipped)   [ed25519] 78   node 32
+#     rust    default 37 (1 skipped) / 38 with --features ed25519
+#             The counts are asserted, so drift fails the build.
+# A number that cannot be reproduced by this workflow does not go in a README.
+# ---------------------------------------------------------------------------
+#
+# Repository layout assumed by the working-directory line below:
+#     URI/V1.2.8/{python,javascript,rust}
+# Adjust the working-directory line if the crate lives elsewhere.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  iqa-rust-source:
+    name: iqa / rust source / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    defaults:
+      run:
+        working-directory: URI/V1.2.8/rust
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: toolchain
+        run: rustc --version
+      - name: zero-dependency check (default build)
+        shell: bash
+        run: |
+          out=$(cargo tree) || { echo "$out"; exit 1; }
+          echo "$out"
+          test "$(printf '%s\n' "$out" | wc -l)" -eq 1
+      - name: cargo test (default features) - 37 checks, 1 skipped
+        shell: bash
+        run: |
+          out=$(cargo test -- --nocapture) || { echo "$out"; exit 1; }
+          echo "$out"
+          echo "$out" | grep -q 'all 37 checks passed (1 skipped)'
+      - name: cargo test (ed25519 feature) - 38 checks
+        shell: bash
+        run: |
+          out=$(cargo test --features ed25519 -- --nocapture) || { echo "$out"; exit 1; }
+          echo "$out"
+          echo "$out" | grep -q 'all 38 checks passed'
+
+  iqa-python-published:
+    name: iqa / PyPI iqa-org / py${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ['3.9', '3.12', '3.14']
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: toolchain
+        run: python -VV
+      - name: default install - zero dependencies (3 skipped: the Ed25519 backend)
+        shell: bash
+        run: |
+          python -m pip install --disable-pip-version-check --quiet iqa-org
+          python -m iqa.selftest > selftest-default.txt 2>&1 || { cat selftest-default.txt; exit 1; }
+          cat selftest-default.txt
+          grep -q 'all 75 checks passed (3 skipped)' selftest-default.txt
+      - name: optional backend - pip install iqa-org[ed25519]
+        shell: bash
+        run: |
+          python -m pip install --disable-pip-version-check --quiet 'iqa-org[ed25519]'
+          python -m iqa.selftest > selftest-ed25519.txt 2>&1 || { cat selftest-ed25519.txt; exit 1; }
+          cat selftest-ed25519.txt
+          grep -q 'all 78 checks passed' selftest-ed25519.txt
+      - name: published vector sha256 (recorded, not asserted)
+        shell: bash
+        run: |
+          python -c "import hashlib,os,iqa; p=os.path.join(os.path.dirname(iqa.__file__),'vectors','iqa-conformance-v1.2.6.json'); print('vector file:',p); print('sha256:',hashlib.sha256(open(p,'rb').read()).hexdigest())"
+
+  iqa-node-published:
+    name: iqa / npm @aicent/iqa / node${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['18', '20', '24']
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: toolchain
+        run: node --version
+      - name: replay the shipped vectors (independent implementation)
+        shell: bash
+        run: |
+          out=$(npx --yes @aicent/iqa) || { echo "$out"; exit 1; }
+          echo "$out"
+          echo "$out" | grep -q 'all 32 checks passed'
