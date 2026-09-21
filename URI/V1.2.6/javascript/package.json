@@ -1,0 +1,54 @@
+{
+  "name": "@aicent/iqa",
+  "version": "1.2.6",
+  "description": "IQA for JavaScript: iqa:// subject-attestation addressing, IQA_ROUTE derivation, action safety classes — and the published conformance vectors that prove an implementation is right.",
+  "author": "IQA.ORG Organization",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./src/iqa-uri.mjs",
+  "types": "./src/iqa-uri.d.mts",
+  "exports": {
+    ".": {
+      "types": "./src/iqa-uri.d.mts",
+      "default": "./src/iqa-uri.mjs"
+    },
+    "./conformance": {
+      "types": "./src/conformance.d.mts",
+      "default": "./src/conformance.mjs"
+    },
+    "./vectors.json": "./src/vectors.json"
+  },
+  "bin": {
+    "iqa": "bin/iqa.mjs"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "examples/",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "iqa",
+    "attestation",
+    "identity",
+    "uri",
+    "conformance",
+    "ed25519",
+    "aicent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aicent-Stack/aicent-stack.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepublishOnly": "node --test"
+  }
+}

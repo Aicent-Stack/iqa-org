@@ -1,0 +1,187 @@
+# iqa-org
+
+**Reference implementation of the IQA attestation layer: the `iqa://`
+subject-attestation URI (RFC-009 §10), action safety classes (§11), and the
+self-certifying Ed25519 attestation envelope.**
+
+[RFC-009 §10](https://iqa.org/RFC-009/) · §11 · v1.2.6
+
+---
+
+## Verify it in one command — no trust required
+
+```console
+$ pip install iqa-org
+$ python -m iqa.selftest
+...
+[PASS] all 59 checks passed
+```
+
+That is the point of this package. A specification is worth exactly what an
+independent implementation can reproduce from it — so instead of asking you to
+believe a table of numbers, this ships the vectors and replays them locally:
+
+* **31 conformance checks** — `iqa://` parsing, the two **closed sets**
+  (`organ` / `action` — the deliberate difference from `rttp`, whose verb set
+  is open), fail-closed rejections, §11.3 action safety classes, and the
+  `IQA_ROUTE` derivation.
+* **2 RFC 8032 checks** — the Ed25519 backend is shown to be *standard*
+  Ed25519, not a lookalike, so a failure tells you which half broke.
+* **22 envelope checks** — deterministic-vector reproduction, round-trip,
+  self-certification, freshness, claim validation, and a 14-case tamper matrix
+  where every alteration must be rejected.
+* **4 zero-dependency checks** — a static scan proving the core imports
+  nothing outside the standard library.
+
+Offline. No account. No network. `[PASS]` or it is not.
+
+---
+
+## Install
+
+```console
+pip install iqa-org              # core: zero dependencies, standard library only
+pip install iqa-org[ed25519]     # + sovereign attestation envelopes (Ed25519)
+```
+
+Python 3.9+. No compiled extensions in the core.
+
+The core deliberately has **no dependencies**. A protocol reference that cannot
+be read without resolving a dependency tree is not much of a reference — and an
+air-gapped reviewer should be able to check the claims.
+
+---
+
+## What is in the box
+
+| Module | What it does | Authority |
+|:---|:---|:---|
+| `iqa.iqa_uri` | `iqa://` codec — validate, canonicalise, classify (8/32/64 hex or name subject), enforce the `organ` and `action` **closed sets**, report `action_safe` | RFC-009 §10.1/§10.2/§10.3 |
+| `iqa.iqa_uri.derive_route` | `IQA_ROUTE = SHA-256(ASCII(authority))[0:4]` — pure computation, DNS-free | `SPEC/IQA-URI-ATTEST-v1.2.6.md` §3 |
+| `iqa.attest` | **Sovereign attestation envelope** — Ed25519, self-certifying (`AID = SHA-256(pub)`), domain prefix `iqa-attest-v1`, `ts`/`nonce` inside the signature | `SPEC/IQA-URI-ATTEST-v1.2.6.md` §5 (draft) |
+
+Plus `iqa.vectors` — the published conformance vectors, shipped inside the
+wheel so the self-test works from an installed package with no repository
+checkout.
+
+---
+
+## Quickstart
+
+### Address a standing claim
+
+```python
+from iqa import iqa_uri
+
+parsed = iqa_uri.parse("iqa://3f9a1b2c.gateway.iqa")
+parsed["subject"]        # '3f9a1b2c'   (8-hex routing short form)
+parsed["organ"]          # 'gateway'    (closed set: forge | tss | gateway)
+parsed["action"]         # None         (omitted = standing read, §11.1)
+parsed["action_safe"]    # True         (§11.3)
+parsed["route_hex"]      # '5c378581'   <- pure computation, vector-pinned
+```
+
+Addressing is **DNS-free** (RFC-009 §12 #9): the route fingerprint is derived
+from the authority by SHA-256, so no registry, resolver or network is involved.
+Malformed input is rejected rather than normalised — a case variant is not a
+spelling difference, it is a different string.
+
+### The closed sets — the deliberate difference from `rttp`
+
+```python
+iqa_uri.parse("iqa://3f9a1b2c.gateway.iqa/pulse")
+# IqaUriError: action 'pulse' is outside the closed set — 'pulse' is an rttp verb
+
+iqa_uri.parse("iqa://3f9a1b2c.forgery.iqa")
+# IqaUriError: organ is a closed set (forge | tss | gateway)
+```
+
+### Seal an attestation with your own identity
+
+```python
+from iqa import attest
+
+keypair = attest.generate_keypair()          # nothing is issued to you
+print(keypair["aid_hex"])                    # = SHA-256(public key): your identity
+
+claim = attest.build_claim("iqa://3f9a1b2c.gateway.iqa", "gateway", "radiant")
+envelope = attest.seal(claim, keypair)
+
+ok, reason, aid = attest.verify_envelope(envelope)
+# ok=True — signer identity recovered from the packet itself
+```
+
+The verifier needs **only the envelope**. There is no key directory, no
+credentials to obtain, and no operator who could refuse to issue them. The
+envelope **carries a claim** that an Organ rendered a standing; it does not
+**create** one — verifying an attestation and trusting an attestation are
+different acts (RFC-009 §10.4).
+
+---
+
+## Scope — what this package is not
+
+| | |
+|:---|:---|
+| ✅ **Validation / canonicalisation** | Real, and specified (RFC-009 §10.2 / §10.3). |
+| ✅ **Closed-set enforcement** | Real, and specified (§10.1). |
+| ✅ **IQA_ROUTE derivation** | Real (SPEC §3, decision D1). |
+| ✅ **Action safety classes** | Real, and specified (§11.3). |
+| ✅ **Attestation envelope** | Real, and specified (draft). |
+| ❌ **Dereferencing / resolver service** | Not here. The codec computes; *answering* a standing read is an Organ's job (RFC-009-C §3). |
+| ❌ **Staking & tiers** | ZCMK collateral economics — operator policy, no cryptographic object in this package. |
+| ❌ **Vitality monitoring** | 1200 Hz heartbeats and Homeostasis Scores are telemetry, not codec. |
+| ❌ **Post-quantum Lattice Guard** | RFC-009 §12 #11 schedules it for v1.4.0; no implementation exists. |
+| ❌ **Revocation transport** | §11.3 defines the verb; executing it is not the codec's job. |
+| ❌ **Confidentiality** | Signing is not encryption. |
+
+Unknown revisions, algorithms and malformed input **fail closed** everywhere.
+Nothing in this package is ever accepted because a check could not be performed.
+
+---
+
+## Conformance vectors
+
+`iqa/vectors/iqa-conformance-v1.2.6.json` is generated, not hand-edited. Each
+vector is deterministic: fixed sequence values, fixed timestamp, fixed seed —
+so two implementations either agree byte for byte or they do not. The same
+file ships in the npm package `iqa` (three mirrors, one sha256), and the
+JavaScript side is an **independent** implementation that replays it without
+sharing a line of code with this one.
+
+The vector set is the intended deliverable for third-party certification: pass
+it and you interoperate; fail it and you know exactly which case is wrong,
+without needing to trust the authors.
+
+---
+
+## Naming
+
+| Ecosystem | Name | Status |
+|:---|:---|:---|
+| crates.io | `iqa-org` | held by this project (the Rust crate carries the same name) |
+| PyPI | **`iqa-org`** | **this package** — `pip install iqa-org`, `import iqa` (the import name is unchanged). The bare `iqa` is unregistered but **blocked by PyPI's typosquatting protection** (upload rejected with 400 "too similar to an existing project") — the same class of guard that forced `@aicent/iqa` on npm |
+| npm | **`@aicent/iqa`** | the bare `iqa` name is unregistered but blocked by npm's typosquatting protection (too similar to existing short names) — so the JavaScript side is published under this project's own organization, as `@aicent/rttp` already is. The package name itself is still just `iqa` |
+
+---
+
+## Specification status
+
+* **`iqa` URI scheme** — submitted to IANA under RFC 7595, ticket **#1459963**,
+  Provisional, **under review**. It is **not yet registered** — as of
+  2026-09-18 the IANA "URI Schemes" registry contains no `iqa` entry. Please
+  describe it that way.
+* **URI grammar** — RFC-009 §10.2 (frozen; this package adds no syntax).
+* **Dereference safety** — RFC-009 §11 (closed sets and safety classes).
+* **Attestation envelope** — `SPEC/IQA-URI-ATTEST-v1.2.6.md` §5, a **draft**:
+  the format is implemented and vector-tested, but it is not yet a numbered
+  RFC-009 section.
+
+Where this package and a specification disagree, **the specification wins and
+the package is wrong.** Please report it.
+
+---
+
+## License
+
+Apache-2.0. See `LICENSE`.

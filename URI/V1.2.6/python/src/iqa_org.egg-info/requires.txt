@@ -1,0 +1,8 @@
+
+[dev]
+cryptography>=42
+build
+twine
+
+[ed25519]
+cryptography>=42

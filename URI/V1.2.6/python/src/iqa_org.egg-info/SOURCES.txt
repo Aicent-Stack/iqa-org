@@ -1,0 +1,15 @@
+CHANGELOG.md
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+src/iqa/__init__.py
+src/iqa/attest.py
+src/iqa/iqa_uri.py
+src/iqa/selftest.py
+src/iqa/vectors/iqa-conformance-v1.2.6.json
+src/iqa_org.egg-info/PKG-INFO
+src/iqa_org.egg-info/SOURCES.txt
+src/iqa_org.egg-info/dependency_links.txt
+src/iqa_org.egg-info/requires.txt
+src/iqa_org.egg-info/top_level.txt
