@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# Distribution name. The bare `iqa` is unregistered on PyPI but blocked by its
+# typosquatting protection (upload rejected with 400 "too similar to an
+# existing project"), so the distribution is published as `iqa-org` -- the same
+# name the Rust crate uses on crates.io. The import name is unchanged: `import iqa`.
+name = "iqa-org"
+version = "1.2.8"
+description = "IQA: iqa:// subject-attestation addressing (RFC-009 sec. 10/sec. 11), IQA_ROUTE derivation, and the published conformance vectors that prove an implementation is right"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+keywords = ["iqa", "attestation", "identity", "uri", "conformance", "ed25519", "aicent"]
+# Must match the IANA registration's "Author/Change controller" verbatim.
+authors = [{ name = "IQA.ORG Organization" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Libraries",
+]
+
+# The core deliberately has NO dependencies. A protocol reference that cannot
+# be read without resolving a dependency tree is not much of a reference -- and
+# an air-gapped reviewer should be able to check the frames.
+dependencies = []
+
+[project.optional-dependencies]
+ed25519 = ["cryptography>=42"]
+dev = ["cryptography>=42", "build", "twine"]
+
+[project.urls]
+Homepage = "https://iqa.org/"
+Specification = "https://iqa.org/RFC-009/"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+iqa = ["vectors/*.json"]
