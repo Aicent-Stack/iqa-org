@@ -1,0 +1,260 @@
+{
+  "spec": "IQA-URI-ATTEST-v1.2.6",
+  "applies_to": [
+    "RFC-009 sec. 10",
+    "RFC-009 sec. 11"
+  ],
+  "generated_by": "SPEC/tools/iqa_conformance.py",
+  "note": "Generated file - do not edit by hand. Change the cases in iqa_conformance.py instead.",
+  "route_rule": "IQA_ROUTE = SHA-256(ASCII(canonical_authority))[0:4]",
+  "organ_closed_set": [
+    "forge",
+    "tss",
+    "gateway"
+  ],
+  "action_closed_set": [
+    "verify",
+    "audit",
+    "attest",
+    "revoke"
+  ],
+  "standings_closed_set": [
+    "ghost",
+    "probation",
+    "radiant",
+    "genesis"
+  ],
+  "positive_uris": [
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa",
+      "canonical_uri": "iqa://3f9a1b2c.gateway.iqa",
+      "subject": "3f9a1b2c",
+      "subject_is_hash": true,
+      "organ": "gateway",
+      "root": "iqa",
+      "authority": "3f9a1b2c.gateway.iqa",
+      "action": null,
+      "action_omitted": true,
+      "action_safe": true,
+      "route_hex": "5c378581",
+      "note": null
+    },
+    {
+      "uri": "iqa://0000004149434e531c5b21d80403358b.forge.iqa",
+      "canonical_uri": "iqa://0000004149434e531c5b21d80403358b.forge.iqa",
+      "subject": "0000004149434e531c5b21d80403358b",
+      "subject_is_hash": true,
+      "organ": "forge",
+      "root": "iqa",
+      "authority": "0000004149434e531c5b21d80403358b.forge.iqa",
+      "action": null,
+      "action_omitted": true,
+      "action_safe": true,
+      "route_hex": "133a7fcd",
+      "note": null
+    },
+    {
+      "uri": "iqa://3f9a1b2c.tss.iqa/audit",
+      "canonical_uri": "iqa://3f9a1b2c.tss.iqa/audit",
+      "subject": "3f9a1b2c",
+      "subject_is_hash": true,
+      "organ": "tss",
+      "root": "iqa",
+      "authority": "3f9a1b2c.tss.iqa",
+      "action": "audit",
+      "action_omitted": false,
+      "action_safe": false,
+      "route_hex": "1d60651a",
+      "note": null
+    },
+    {
+      "uri": "iqa://master-authority.gateway.iqa/verify",
+      "canonical_uri": "iqa://master-authority.gateway.iqa/verify",
+      "subject": "master-authority",
+      "subject_is_hash": false,
+      "organ": "gateway",
+      "root": "iqa",
+      "authority": "master-authority.gateway.iqa",
+      "action": "verify",
+      "action_omitted": false,
+      "action_safe": true,
+      "route_hex": "510ef099",
+      "note": null
+    },
+    {
+      "uri": "iqa://0000004149434e531c5b21d80403358ba794ef228ca5253994959ef6f3ff5678.tss.iqa/attest",
+      "canonical_uri": "iqa://0000004149434e531c5b21d80403358ba794ef228ca5253994959ef6f3ff5678.tss.iqa/attest",
+      "subject": "0000004149434e531c5b21d80403358ba794ef228ca5253994959ef6f3ff5678",
+      "subject_is_hash": true,
+      "organ": "tss",
+      "root": "iqa",
+      "authority": "0000004149434e531c5b21d80403358ba794ef228ca5253994959ef6f3ff5678.tss.iqa",
+      "action": "attest",
+      "action_omitted": false,
+      "action_safe": false,
+      "route_hex": "afd25fe8",
+      "note": null
+    },
+    {
+      "uri": "iqa://0000000000000000.gateway.iqa",
+      "canonical_uri": "iqa://0000000000000000.gateway.iqa",
+      "subject": "0000000000000000",
+      "subject_is_hash": false,
+      "organ": "gateway",
+      "root": "iqa",
+      "authority": "0000000000000000.gateway.iqa",
+      "action": null,
+      "action_omitted": true,
+      "action_safe": true,
+      "route_hex": "6ddc5b56",
+      "note": null
+    },
+    {
+      "uri": "iqa://a-b-c.forge.iqa/revoke",
+      "canonical_uri": "iqa://a-b-c.forge.iqa/revoke",
+      "subject": "a-b-c",
+      "subject_is_hash": false,
+      "organ": "forge",
+      "root": "iqa",
+      "authority": "a-b-c.forge.iqa",
+      "action": "revoke",
+      "action_omitted": false,
+      "action_safe": false,
+      "route_hex": "e14bcb62",
+      "note": null
+    },
+    {
+      "uri": "iqa://3f9a1b2cd.gateway.iqa/verify",
+      "canonical_uri": "iqa://3f9a1b2cd.gateway.iqa/verify",
+      "subject": "3f9a1b2cd",
+      "subject_is_hash": false,
+      "organ": "gateway",
+      "root": "iqa",
+      "authority": "3f9a1b2cd.gateway.iqa",
+      "action": "verify",
+      "action_omitted": false,
+      "action_safe": true,
+      "route_hex": "acee0323",
+      "note": "note - 9 hex digits is not a hash length (8/32/64), so the subject parses as a name-subject per the ABNF ordered choice (RFC-009 sec. 10.2)"
+    }
+  ],
+  "negative_uris": [
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa/AUDIT",
+      "reason": "uppercase action - lowercase only (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "iqa://3F9A1B2C.gateway.iqa/audit",
+      "reason": "uppercase hex subject - lowercase only (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "IQA://3f9a1b2c.gateway.iqa/audit",
+      "reason": "uppercase scheme prefix - canonical form is lowercase (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "iqas://3f9a1b2c.gateway.iqa/audit",
+      "reason": "no iqas variant exists and no fallback is defined - fail closed (RFC-009 sec. 12 #8)"
+    },
+    {
+      "uri": "iqa://subject@iqa.org",
+      "reason": "userinfo is not defined (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "iqa://iqa.org/RFC-009/",
+      "reason": "no organ, second path segment - this is an https matter (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.forgery.iqa",
+      "reason": "organ is a closed set (RFC-009 sec. 10.1/sec. 10.3)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa/pulse",
+      "reason": "action is a closed set - 'pulse' is not one of the four verbs (RFC-009 sec. 10.1)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.Gateway.iqa/verify",
+      "reason": "organ is case-sensitive within the closed set (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa/audit?x=1",
+      "reason": "query is not defined (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa/audit#f",
+      "reason": "fragment is not defined (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa:443/audit",
+      "reason": "port is not defined (RFC-009 sec. 10.3)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa/a/b",
+      "reason": "second path segment - path is a single '/<action>' (RFC-009 sec. 10.2)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa/",
+      "reason": "trailing '/' with empty action - the closed set has no empty verb (RFC-009 sec. 10.2)"
+    },
+    {
+      "uri": "iqa://a.b",
+      "reason": "authority has two segments, must be <subject>.<organ>.<root> (RFC-009 sec. 10.2)"
+    },
+    {
+      "uri": "iqa://a.b.c.d/audit",
+      "reason": "authority has four segments, must be <subject>.<organ>.<root> (RFC-009 sec. 10.2)"
+    },
+    {
+      "uri": "https://3f9a1b2c.gateway.iqa/audit",
+      "reason": "not an iqa scheme - there is no fallback (RFC-009 sec. 10.3, sec. 12 #8)"
+    },
+    {
+      "uri": "iqa://3f9a1b2c.gateway.iqa/audit ",
+      "reason": "trailing whitespace"
+    }
+  ],
+  "action_safety": [
+    {
+      "action": null,
+      "safe": true,
+      "why": "omitted - standing read (RFC-009 sec. 11.1/sec. 11.3)"
+    },
+    {
+      "action": "verify",
+      "safe": true,
+      "why": "read-only comparison, no state written (RFC-009 sec. 11.3)"
+    },
+    {
+      "action": "audit",
+      "safe": false,
+      "why": "a failing measurement triggers Authority Ischemia (RFC-009 sec. 11.3/sec. 11.4)"
+    },
+    {
+      "action": "attest",
+      "safe": false,
+      "why": "state transition - Seal issuance (RFC-009 sec. 11.3)"
+    },
+    {
+      "action": "revoke",
+      "safe": false,
+      "why": "state transition - standing withdrawal (RFC-009 sec. 11.3)"
+    }
+  ],
+  "attest_envelope_vector": {
+    "v": 1,
+    "alg": "ed25519",
+    "aid": "3125ee20b2238281f70ca408192f82152647d365219184fa1fe22c08a42c035e",
+    "pub": "9c097c66ab4f82136ceddaef56854f740bf87da3eec42a249ba40bbb066f1e6a",
+    "ts": 1760000000,
+    "nonce": "0011223344556677",
+    "sig": "054b74c8dcd2b2128291ce433409983609d62c63a002138475d5e33bd21ea0b0c6243790db3d926ad6820cdf7e64f49cbd49a794a1b693cb60217a3382a5f007",
+    "payload": {
+      "subject_uri": "iqa://3f9a1b2c.gateway.iqa",
+      "organ": "gateway",
+      "standing": "radiant"
+    },
+    "seed_hex": "e722fed924c7f76b157faab674ea97bb7c3075f55ad7d3c6319418e22b86d611",
+    "signing_input_hex": "6971612d6174746573742d76310a7b22616964223a2233313235656532306232323338323831663730636134303831393266383231353236343764333635323139313834666131666532326330386134326330333565222c22616c67223a2265643235353139222c226e6f6e6365223a2230303131323233333434353536363737222c227061796c6f6164223a7b226f7267616e223a2267617465776179222c227374616e64696e67223a2272616469616e74222c227375626a6563745f757269223a226971613a2f2f33663961316232632e676174657761792e697161227d2c22707562223a2239633039376336366162346638323133366365646461656635363835346637343062663837646133656563343261323439626134306262623036366631653661222c227473223a313736303030303030307d",
+    "domain_prefix_hex": "6971612d6174746573742d76310a",
+    "expected": "verify MUST accept; aid MUST equal SHA-256(pub); signing input MUST reproduce byte for byte"
+  }
+}
