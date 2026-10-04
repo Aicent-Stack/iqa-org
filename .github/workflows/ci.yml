@@ -88,14 +88,14 @@ jobs:
           python -m pip install --disable-pip-version-check --quiet iqa-org
           python -m iqa.selftest > selftest-default.txt 2>&1 || { cat selftest-default.txt; exit 1; }
           cat selftest-default.txt
-          grep -q 'all 75 checks passed (3 skipped)' selftest-default.txt
+          grep -q 'all 108 checks passed (3 skipped)' selftest-default.txt
       - name: optional backend - pip install iqa-org[ed25519]
         shell: bash
         run: |
           python -m pip install --disable-pip-version-check --quiet 'iqa-org[ed25519]'
           python -m iqa.selftest > selftest-ed25519.txt 2>&1 || { cat selftest-ed25519.txt; exit 1; }
           cat selftest-ed25519.txt
-          grep -q 'all 78 checks passed' selftest-ed25519.txt
+          grep -q 'all 111 checks passed' selftest-ed25519.txt
       - name: published vector sha256 (recorded, not asserted)
         shell: bash
         run: |
