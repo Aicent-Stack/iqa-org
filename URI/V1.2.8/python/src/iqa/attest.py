@@ -3,7 +3,7 @@ attest -- the sovereign **attestation envelope** (Ed25519, self-certifying)
 
 Why this module exists
 ----------------------
-An ``iqa://`` URI is a *claim about standing* (RFC-009 sec. 10.4: "parsing is not
+An ``iqa://`` URI is a *claim about standing* (AICENT-009 sec. 10.4: "parsing is not
 attestation"). To act on the claim, a verifier needs evidence. The evidence
 travels as an **envelope**: a signed object that cites the subject URI and
 carries the standing an Organ rendered.
@@ -16,7 +16,7 @@ Layout: identical to the RTTP sovereign seal
        -- a signature made for one scheme can never be replayed as the other.
     2. **Payload semantics.** ``{"subject_uri", "organ", "standing"}``, with
        ``standing`` a closed set (``ghost`` / ``probation`` / ``radiant`` /
-       ``genesis``, RFC-009-C sec. 3).
+       ``genesis``, AICENT-009-C sec. 3).
 
 Identity: ``AID = SHA-256(public key)`` -- self-certifying, recomputed by the
 verifier from the in-band key. No registry, no issuer, no directory. Lose the
@@ -88,7 +88,7 @@ SEED_BYTES = 32
 #: SPEC/IQA-URI-ATTEST-v1.2.6 sec. 5.2 -- domain separation from the RTTP seal.
 CANONICAL_PREFIX = b"iqa-attest-v1\n"
 
-#: Closed set of standings an Organ may render (RFC-009-C sec. 3).
+#: Closed set of standings an Organ may render (AICENT-009-C sec. 3).
 STANDINGS = iqa_uri.STANDINGS
 
 INSTALL_HINT = "pip install iqa-org[ed25519]"
@@ -258,7 +258,7 @@ def _hex_lower(value, what: str, nbytes: int) -> str:
     if not isinstance(value, str):
         raise AttestError(f"{what} must be a hex string")
     if value != value.lower():
-        raise AttestError(f"{what} must be lowercase hex (RFC-009 sec. 10.3 discipline)")
+        raise AttestError(f"{what} must be lowercase hex (AICENT-009 sec. 10.3 discipline)")
     if len(value) != nbytes * 2:
         raise AttestError(f"{what} must be {nbytes} bytes ({nbytes * 2} hex chars)")
     try:

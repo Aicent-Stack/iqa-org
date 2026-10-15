@@ -1,10 +1,10 @@
 # iqa-org
 
 **Reference implementation of the IQA attestation layer: the `iqa://`
-subject-attestation URI (RFC-009 sec. 10), action safety classes (sec. 11), and the
+subject-attestation URI (AICENT-009 sec. 10), action safety classes (sec. 11), and the
 self-certifying Ed25519 attestation envelope.**
 
-[RFC-009 sec. 10](https://iqa.org/RFC-009/) - sec. 11 - stack v1.2.6
+[AICENT-009 sec. 10](https://iqa.org/AICENT-009/) - sec. 11 - stack v1.2.6
 
 ---
 
@@ -63,7 +63,7 @@ air-gapped reviewer should be able to check the claims.
 
 | Module | What it does | Authority |
 |:---|:---|:---|
-| `iqa.iqa_uri` | `iqa://` codec -- validate, canonicalise, classify (8/32/64 hex or name subject), enforce the `organ` and `action` **closed sets**, report `action_safe` | RFC-009 sec. 10.1/sec. 10.2/sec. 10.3 |
+| `iqa.iqa_uri` | `iqa://` codec -- validate, canonicalise, classify (8/32/64 hex or name subject), enforce the `organ` and `action` **closed sets**, report `action_safe` | AICENT-009 sec. 10.1/sec. 10.2/sec. 10.3 |
 | `iqa.iqa_uri.derive_route` | `IQA_ROUTE = SHA-256(ASCII(authority))[0:4]` -- pure computation, DNS-free | `SPEC/IQA-URI-ATTEST-v1.2.6.md` sec. 3 |
 | `iqa.attest` | **Sovereign attestation envelope** -- Ed25519, self-certifying (`AID = SHA-256(pub)`), domain prefix `iqa-attest-v1`, `ts`/`nonce` inside the signature | `SPEC/IQA-URI-ATTEST-v1.2.6.md` sec. 5 (draft) |
 
@@ -88,7 +88,7 @@ parsed["action_safe"]    # True         (sec. 11.3)
 parsed["route_hex"]      # '5c378581'   <- pure computation, vector-pinned
 ```
 
-Addressing is **DNS-free** (RFC-009 sec. 12 #9): the route fingerprint is derived
+Addressing is **DNS-free** (AICENT-009 sec. 12 #9): the route fingerprint is derived
 from the authority by SHA-256, so no registry, resolver or network is involved.
 Malformed input is rejected rather than normalised -- a case variant is not a
 spelling difference, it is a different string.
@@ -122,7 +122,7 @@ The verifier needs **only the envelope**. There is no key directory, no
 credentials to obtain, and no operator who could refuse to issue them. The
 envelope **carries a claim** that an Organ rendered a standing; it does not
 **create** one -- verifying an attestation and trusting an attestation are
-different acts (RFC-009 sec. 10.4).
+different acts (AICENT-009 sec. 10.4).
 
 ---
 
@@ -130,15 +130,15 @@ different acts (RFC-009 sec. 10.4).
 
 | | |
 |:---|:---|
-| OK **Validation / canonicalisation** | Real, and specified (RFC-009 sec. 10.2 / sec. 10.3). |
+| OK **Validation / canonicalisation** | Real, and specified (AICENT-009 sec. 10.2 / sec. 10.3). |
 | OK **Closed-set enforcement** | Real, and specified (sec. 10.1). |
 | OK **IQA_ROUTE derivation** | Real (SPEC sec. 3, decision D1). |
 | OK **Action safety classes** | Real, and specified (sec. 11.3). |
 | OK **Attestation envelope** | Real, and specified (draft). |
-| NO **Dereferencing / resolver service** | Not here. The codec computes; *answering* a standing read is an Organ's job (RFC-009-C sec. 3). |
+| NO **Dereferencing / resolver service** | Not here. The codec computes; *answering* a standing read is an Organ's job (AICENT-009-C sec. 3). |
 | NO **Staking & tiers** | ZCMK collateral economics -- operator policy, no cryptographic object in this package. |
 | NO **Vitality monitoring** | 1200 Hz heartbeats and Homeostasis Scores are telemetry, not codec. |
-| NO **Post-quantum Lattice Guard** | RFC-009 sec. 12 #11 schedules it for v1.4.0; no implementation exists. |
+| NO **Post-quantum Lattice Guard** | AICENT-009 sec. 12 #11 schedules it for v1.4.0; no implementation exists. |
 | NO **Revocation transport** | sec. 11.3 defines the verb; executing it is not the codec's job. |
 | NO **Confidentiality** | Signing is not encryption. |
 
@@ -184,11 +184,11 @@ without needing to trust the authors.
   https://datatracker.ietf.org/doc/draft-li-iqa-subject-attestation/ .
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
-* **URI grammar** -- RFC-009 sec. 10.2 (frozen; this package adds no syntax).
-* **Dereference safety** -- RFC-009 sec. 11 (closed sets and safety classes).
+* **URI grammar** -- AICENT-009 sec. 10.2 (frozen; this package adds no syntax).
+* **Dereference safety** -- AICENT-009 sec. 11 (closed sets and safety classes).
 * **Attestation envelope** -- `SPEC/IQA-URI-ATTEST-v1.2.6.md` sec. 5, a **draft**:
   the format is implemented and vector-tested, but it is not yet a numbered
-  RFC-009 section.
+  AICENT-009 section.
 
 Where this package and a specification disagree, **the specification wins and
 the package is wrong.** Please report it.

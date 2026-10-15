@@ -1,10 +1,10 @@
 # iqa-org
 
 **IQA for Rust: `iqa://` subject-attestation addressing, `IQA_ROUTE`
-derivation, RFC-009 sec. 11.3 action safety classes -- and the published
+derivation, AICENT-009 sec. 11.3 action safety classes -- and the published
 conformance vectors that prove an implementation is right.**
 
-[RFC-009 sec. 10](https://iqa.org/RFC-009/) - sec. 11 - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
+[AICENT-009 sec. 10](https://iqa.org/AICENT-009/) - sec. 11 - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
 
 ---
 
@@ -65,7 +65,7 @@ parsed.route_hex;      // "5c378581"   -- IQA_ROUTE, pure computation
 
 ### The two closed sets -- the deliberate difference from `rttp`
 
-`rttp` accepts any well-formed action verb. **`iqa` does not.** RFC-009 sec. 10.1
+`rttp` accepts any well-formed action verb. **`iqa` does not.** AICENT-009 sec. 10.1
 marks *both* segments "Closed set":
 
 ```rust
@@ -84,7 +84,7 @@ hex string of a **non-hash length** (9 digits, say) is a *name subject*, not an
 error. The grammar is the grammar; vector #8 pins the behaviour so every
 implementation agrees on it.
 
-### Action safety classes (RFC-009 sec. 11.3)
+### Action safety classes (AICENT-009 sec. 11.3)
 
 | `action` | Class | `action_safe` |
 |:---|:---|:---|
@@ -108,7 +108,7 @@ Ed25519, self-certifying (`AID = SHA-256(public key)`), domain prefix
 `iqa-attest-v1`, `ts`/`nonce` inside the signature, 120-second freshness,
 claim validation against both closed sets. The verifier needs only the
 envelope -- no key directory, no issuer. The envelope **carries** a claim; it
-does not **create** one (RFC-009 sec. 10.4: parsing is not attestation).
+does not **create** one (AICENT-009 sec. 10.4: parsing is not attestation).
 
 ---
 
@@ -116,14 +116,14 @@ does not **create** one (RFC-009 sec. 10.4: parsing is not attestation).
 
 | | |
 |:---|:---|
-| OK **Validation / canonicalisation** | Real, and specified (RFC-009 sec. 10.2 / sec. 10.3). |
+| OK **Validation / canonicalisation** | Real, and specified (AICENT-009 sec. 10.2 / sec. 10.3). |
 | OK **Closed-set enforcement** | Real, and specified (sec. 10.1). |
 | OK **IQA_ROUTE derivation** | Real (SPEC sec. 3, decision D1). |
 | OK **Action safety classes** | Real, and specified (sec. 11.3). |
 | OK **Attestation envelope** | Real, and specified (draft) -- feature `ed25519`. |
-| NO **Dereferencing / resolver service** | Not here. The codec computes; *answering* a standing read is an Organ's job (RFC-009-C sec. 3). |
-| NO **Staking, tiers, vitality** | Operator economics and telemetry -- RFC-009 narrative, no cryptographic object here. |
-| NO **Post-quantum Lattice Guard** | RFC-009 sec. 12 #11 schedules it for v1.4.0; no implementation exists. |
+| NO **Dereferencing / resolver service** | Not here. The codec computes; *answering* a standing read is an Organ's job (AICENT-009-C sec. 3). |
+| NO **Staking, tiers, vitality** | Operator economics and telemetry -- AICENT-009 narrative, no cryptographic object here. |
+| NO **Post-quantum Lattice Guard** | AICENT-009 sec. 12 #11 schedules it for v1.4.0; no implementation exists. |
 | NO **Confidentiality** | Signing is not encryption. |
 
 ---
@@ -149,8 +149,8 @@ does not **create** one (RFC-009 sec. 10.4: parsing is not attestation).
   https://datatracker.ietf.org/doc/draft-li-iqa-subject-attestation/ .
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
-* **URI grammar** -- RFC-009 sec. 10.2 (frozen; this crate adds no syntax).
-* **Dereference safety** -- RFC-009 sec. 11 (closed sets and safety classes).
+* **URI grammar** -- AICENT-009 sec. 10.2 (frozen; this crate adds no syntax).
+* **Dereference safety** -- AICENT-009 sec. 11 (closed sets and safety classes).
 * **Attestation envelope** -- `SPEC/IQA-URI-ATTEST-v1.2.6.md` sec. 5, a **draft**.
 
 Where this crate and a specification disagree, **the specification wins and

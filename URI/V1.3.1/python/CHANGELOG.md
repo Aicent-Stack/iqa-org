@@ -126,7 +126,7 @@ Initial public release.
 
 ### Added
 
-* **`iqa://` URI codec** (RFC-009 sec. 10.2/sec. 10.3): validate, canonicalise and
+* **`iqa://` URI codec** (AICENT-009 sec. 10.2/sec. 10.3): validate, canonicalise and
   classify -- subject hash forms (8/32/64 lowercase hex) and name forms,
   **closed-set** enforcement for `organ` (`forge`/`tss`/`gateway`) and
   `action` (`verify`/`audit`/`attest`/`revoke`), fail-closed rejection of
@@ -136,7 +136,7 @@ Initial public release.
 * **`IQA_ROUTE` derivation** (SPEC/IQA-URI-ATTEST-v1.2.6 sec. 3, decision D1):
   `SHA-256(ASCII(authority))[0:4]` -- pure computation, DNS-free, mirroring the
   RTTP `ROUTE_SHARD` rule.
-* **Action safety classes** (RFC-009 sec. 11.3) exposed as `action_safe` --
+* **Action safety classes** (AICENT-009 sec. 11.3) exposed as `action_safe` --
   omitted/verify SAFE, audit/attest/revoke NOT SAFE.
 * **Sovereign attestation envelope** (`iqa.attest`, optional `[ed25519]`
   extra): Ed25519, self-certifying `AID = SHA-256(public key)`, domain prefix

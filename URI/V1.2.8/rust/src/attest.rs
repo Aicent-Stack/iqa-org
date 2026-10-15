@@ -4,7 +4,7 @@
 //! envelope's signing input and AID self-certification.
 //!
 //! The envelope **carries a claim** that an Organ rendered a standing; it does
-//! not **create** one. Verifying is not trusting (RFC-009 sec. 10.4).
+//! not **create** one. Verifying is not trusting (AICENT-009 sec. 10.4).
 
 use crate::iqa_uri;
 use crate::json::Json;

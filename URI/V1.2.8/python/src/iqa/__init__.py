@@ -1,4 +1,4 @@
-"""iqa -- reference implementation of the IQA attestation layer (RFC-009 sec. 10/sec. 11).
+"""iqa -- reference implementation of the IQA attestation layer (AICENT-009 sec. 10/sec. 11).
 
 What is in the box
 ------------------
@@ -15,7 +15,7 @@ What is in the box
 Scope
 -----
 This is the **codec**, not the organism. Staking, vitality monitoring and the
-post-quantum Lattice Guard are RFC-009 narrative with no object here -- see the
+post-quantum Lattice Guard are AICENT-009 narrative with no object here -- see the
 package README's scope table and SPEC sec. 8.
 
 Verify it

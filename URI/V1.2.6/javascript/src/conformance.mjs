@@ -1,6 +1,6 @@
-// IQA conformance replay — an INDEPENDENT implementation of RFC-009 §10.
+// IQA conformance replay — an INDEPENDENT implementation of AICENT-009 §10.
 //
-// This file is written from RFC-009 §10/§11 alone and MUST NEVER import
+// This file is written from AICENT-009 §10/§11 alone and MUST NEVER import
 // ./iqa-uri.mjs. A conformance suite that reuses the code under test only
 // proves the code equals itself. The two files share no code, so the rule is
 // checkable by reading them.

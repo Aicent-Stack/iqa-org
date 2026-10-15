@@ -1,5 +1,5 @@
 /*
- *  AICENT STACK - RFC-009: IQA-ORG (The Sovereign Certification Layer)
+ *  AICENT STACK - AICENT-009: IQA-ORG (The Sovereign Certification Layer)
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Demonstrating Temporal Self-Supervision and 128-Bit Radiant Seal Issuance."
@@ -72,8 +72,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // 6. Sovereignty Awareness (PICSI Feedback)
-    // Synchronizing the gatekeeper with the Imperial Eye (RFC-014).
-    println!("\n[METABOLISM] Synchronizing with Imperial Eye (RFC-014)...");
+    // Synchronizing the gatekeeper with the Imperial Eye (AICENT-014).
+    println!("\n[METABOLISM] Synchronizing with Imperial Eye (AICENT-014)...");
     iqa_hub.current_homeostasis.picsi_resonance_idx = 0.999990;
     iqa_hub.current_homeostasis.metabolic_efficiency = 0.9999;
     
@@ -89,6 +89,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Registered Seals: {}", iqa_hub.radiant_registry.len());
     println!("Seal Tax Rate:    {:.2}%", hs.entropy_tax_rate * 100.0);
 
-    println!("\n[FINISH] RFC-009 Demonstration complete. The Seal is Absolute.");
+    println!("\n[FINISH] AICENT-009 Demonstration complete. The Seal is Absolute.");
     Ok(())
 }

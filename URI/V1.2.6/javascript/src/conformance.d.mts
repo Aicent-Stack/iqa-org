@@ -13,7 +13,7 @@ export interface ParsedForConformance {
 }
 
 /**
- * The independent RFC-009 §10 implementation used by the checker.
+ * The independent AICENT-009 §10 implementation used by the checker.
  * `buildFrame`-style helpers do not exist here: IQA v1.2.6 has no frame —
  * the derivation chain is URI → IQA_ROUTE (4 bytes).
  */

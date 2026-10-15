@@ -1,8 +1,8 @@
 {
   "spec": "IQA-URI-ATTEST-v1.2.6",
   "applies_to": [
-    "RFC-009 §10",
-    "RFC-009 §11"
+    "AICENT-009 §10",
+    "AICENT-009 §11"
   ],
   "generated_by": "SPEC/tools/iqa_conformance.py",
   "note": "Generated file - do not edit by hand. Change the cases in iqa_conformance.py instead.",
@@ -135,77 +135,77 @@
       "action_omitted": false,
       "action_safe": true,
       "route_hex": "acee0323",
-      "note": "note - 9 hex digits is not a hash length (8/32/64), so the subject parses as a name-subject per the ABNF ordered choice (RFC-009 §10.2)"
+      "note": "note - 9 hex digits is not a hash length (8/32/64), so the subject parses as a name-subject per the ABNF ordered choice (AICENT-009 §10.2)"
     }
   ],
   "negative_uris": [
     {
       "uri": "iqa://3f9a1b2c.gateway.iqa/AUDIT",
-      "reason": "uppercase action - lowercase only (RFC-009 §10.3)"
+      "reason": "uppercase action - lowercase only (AICENT-009 §10.3)"
     },
     {
       "uri": "iqa://3F9A1B2C.gateway.iqa/audit",
-      "reason": "uppercase hex subject - lowercase only (RFC-009 §10.3)"
+      "reason": "uppercase hex subject - lowercase only (AICENT-009 §10.3)"
     },
     {
       "uri": "IQA://3f9a1b2c.gateway.iqa/audit",
-      "reason": "uppercase scheme prefix - canonical form is lowercase (RFC-009 §10.3)"
+      "reason": "uppercase scheme prefix - canonical form is lowercase (AICENT-009 §10.3)"
     },
     {
       "uri": "iqas://3f9a1b2c.gateway.iqa/audit",
-      "reason": "no iqas variant exists and no fallback is defined - fail closed (RFC-009 §12 #8)"
+      "reason": "no iqas variant exists and no fallback is defined - fail closed (AICENT-009 §12 #8)"
     },
     {
       "uri": "iqa://subject@iqa.org",
-      "reason": "userinfo is not defined (RFC-009 §10.3)"
+      "reason": "userinfo is not defined (AICENT-009 §10.3)"
     },
     {
-      "uri": "iqa://iqa.org/RFC-009/",
-      "reason": "no organ, second path segment - this is an https matter (RFC-009 §10.3)"
+      "uri": "iqa://iqa.org/AICENT-009/",
+      "reason": "no organ, second path segment - this is an https matter (AICENT-009 §10.3)"
     },
     {
       "uri": "iqa://3f9a1b2c.forgery.iqa",
-      "reason": "organ is a closed set (RFC-009 §10.1/§10.3)"
+      "reason": "organ is a closed set (AICENT-009 §10.1/§10.3)"
     },
     {
       "uri": "iqa://3f9a1b2c.gateway.iqa/pulse",
-      "reason": "action is a closed set - 'pulse' is not one of the four verbs (RFC-009 §10.1)"
+      "reason": "action is a closed set - 'pulse' is not one of the four verbs (AICENT-009 §10.1)"
     },
     {
       "uri": "iqa://3f9a1b2c.Gateway.iqa/verify",
-      "reason": "organ is case-sensitive within the closed set (RFC-009 §10.3)"
+      "reason": "organ is case-sensitive within the closed set (AICENT-009 §10.3)"
     },
     {
       "uri": "iqa://3f9a1b2c.gateway.iqa/audit?x=1",
-      "reason": "query is not defined (RFC-009 §10.3)"
+      "reason": "query is not defined (AICENT-009 §10.3)"
     },
     {
       "uri": "iqa://3f9a1b2c.gateway.iqa/audit#f",
-      "reason": "fragment is not defined (RFC-009 §10.3)"
+      "reason": "fragment is not defined (AICENT-009 §10.3)"
     },
     {
       "uri": "iqa://3f9a1b2c.gateway.iqa:443/audit",
-      "reason": "port is not defined (RFC-009 §10.3)"
+      "reason": "port is not defined (AICENT-009 §10.3)"
     },
     {
       "uri": "iqa://3f9a1b2c.gateway.iqa/a/b",
-      "reason": "second path segment - path is a single '/<action>' (RFC-009 §10.2)"
+      "reason": "second path segment - path is a single '/<action>' (AICENT-009 §10.2)"
     },
     {
       "uri": "iqa://3f9a1b2c.gateway.iqa/",
-      "reason": "trailing '/' with empty action - the closed set has no empty verb (RFC-009 §10.2)"
+      "reason": "trailing '/' with empty action - the closed set has no empty verb (AICENT-009 §10.2)"
     },
     {
       "uri": "iqa://a.b",
-      "reason": "authority has two segments, must be <subject>.<organ>.<root> (RFC-009 §10.2)"
+      "reason": "authority has two segments, must be <subject>.<organ>.<root> (AICENT-009 §10.2)"
     },
     {
       "uri": "iqa://a.b.c.d/audit",
-      "reason": "authority has four segments, must be <subject>.<organ>.<root> (RFC-009 §10.2)"
+      "reason": "authority has four segments, must be <subject>.<organ>.<root> (AICENT-009 §10.2)"
     },
     {
       "uri": "https://3f9a1b2c.gateway.iqa/audit",
-      "reason": "not an iqa scheme - there is no fallback (RFC-009 §10.3, §12 #8)"
+      "reason": "not an iqa scheme - there is no fallback (AICENT-009 §10.3, §12 #8)"
     },
     {
       "uri": "iqa://3f9a1b2c.gateway.iqa/audit ",
@@ -216,27 +216,27 @@
     {
       "action": null,
       "safe": true,
-      "why": "omitted - standing read (RFC-009 §11.1/§11.3)"
+      "why": "omitted - standing read (AICENT-009 §11.1/§11.3)"
     },
     {
       "action": "verify",
       "safe": true,
-      "why": "read-only comparison, no state written (RFC-009 §11.3)"
+      "why": "read-only comparison, no state written (AICENT-009 §11.3)"
     },
     {
       "action": "audit",
       "safe": false,
-      "why": "a failing measurement triggers Authority Ischemia (RFC-009 §11.3/§11.4)"
+      "why": "a failing measurement triggers Authority Ischemia (AICENT-009 §11.3/§11.4)"
     },
     {
       "action": "attest",
       "safe": false,
-      "why": "state transition - Seal issuance (RFC-009 §11.3)"
+      "why": "state transition - Seal issuance (AICENT-009 §11.3)"
     },
     {
       "action": "revoke",
       "safe": false,
-      "why": "state transition - standing withdrawal (RFC-009 §11.3)"
+      "why": "state transition - standing withdrawal (AICENT-009 §11.3)"
     }
   ],
   "attest_envelope_vector": {

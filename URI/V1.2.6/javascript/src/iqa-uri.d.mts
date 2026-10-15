@@ -1,5 +1,5 @@
 /**
- * iqa — RFC-009 §10/§11 codec for JavaScript.
+ * iqa — AICENT-009 §10/§11 codec for JavaScript.
  * Zero dependencies. Field names are snake_case on purpose: they match the
  * published conformance vectors (and the Python implementation) field for field.
  */
@@ -12,7 +12,7 @@ export declare const HASH_LENGTHS: readonly [8, 32, 64];
 
 export declare class IqaUriError extends Error {}
 
-/** True only for the closed four-verb set (RFC-009 §10.1). */
+/** True only for the closed four-verb set (AICENT-009 §10.1). */
 export declare function isValidAction(value: string): boolean;
 
 /**
@@ -32,7 +32,7 @@ export interface ParsedUri {
   authority: string;
   action: string | null;
   action_omitted: boolean;
-  /** RFC-009 §11.3 — true for omitted and `verify`, false for audit/attest/revoke. */
+  /** AICENT-009 §11.3 — true for omitted and `verify`, false for audit/attest/revoke. */
   action_safe: boolean;
   canonical_uri: string;
   route_hex: string;

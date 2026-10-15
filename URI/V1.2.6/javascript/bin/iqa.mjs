@@ -22,7 +22,7 @@ for (let i = 0; i < args.length; i++) {
   } else if (args[i] === '--json') {
     json = true;
   } else if (args[i] === '--help' || args[i] === '-h') {
-    console.log('@aicent/iqa — replay the published conformance vectors (RFC-009 §10/§11)');
+    console.log('@aicent/iqa — replay the published conformance vectors (AICENT-009 §10/§11)');
     console.log('  npx @aicent/iqa                       replay the shipped vectors');
     console.log('  npx @aicent/iqa --vectors ./new.json  replay a different vector set');
     console.log('  npx @aicent/iqa --json                machine-readable output');

@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 # name the Rust crate uses on crates.io. The import name is unchanged: `import iqa`.
 name = "iqa-org"
 version = "1.2.6"
-description = "IQA: iqa:// subject-attestation addressing (RFC-009 §10/§11), IQA_ROUTE derivation, and the published conformance vectors that prove an implementation is right"
+description = "IQA: iqa:// subject-attestation addressing (AICENT-009 §10/§11), IQA_ROUTE derivation, and the published conformance vectors that prove an implementation is right"
 readme = "README.md"
 requires-python = ">=3.9"
 license = "Apache-2.0"
@@ -42,7 +42,7 @@ dev = ["cryptography>=42", "build", "twine"]
 
 [project.urls]
 Homepage = "https://iqa.org/"
-Specification = "https://iqa.org/RFC-009/"
+Specification = "https://iqa.org/AICENT-009/"
 
 [tool.setuptools.packages.find]
 where = ["src"]

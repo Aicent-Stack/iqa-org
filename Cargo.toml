@@ -3,7 +3,7 @@ name = "iqa-org"
 version = "1.2.5-alpha"
 edition = "2021"
 authors = ["Aicent Stack Technical Committee <admin@aicent.com>"]
-description = "RFC-009: The Sovereign Certification Layer. Identity Quality Assurance (IQA) and 128-bit Radiant Seal verification for the Aicent Stack 2026. Aligned with RFC-014 (PICSI)."
+description = "AICENT-009: The Sovereign Certification Layer. Identity Quality Assurance (IQA) and 128-bit Radiant Seal verification for the Aicent Stack 2026. Aligned with AICENT-014 (PICSI)."
 license = "Apache-2.0"
 homepage = "http://iqa.org"
 repository = "http://github.com/Aicent-Stack/iqa-org"
@@ -13,7 +13,7 @@ repository = "http://github.com/Aicent-Stack/iqa-org"
 # =========================================================================
 
 [dependencies]
-# THE SOVEREIGN LADDER: Certification requires the genetic DNA of the Soul (RFC-000).
+# THE SOVEREIGN LADDER: Certification requires the genetic DNA of the Soul (AICENT-000).
 # Anchoring authority to the v1.2.5 root DNA of the organism.
 epoekie = { version = "1.2.5-alpha" }
 

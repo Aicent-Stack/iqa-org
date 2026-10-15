@@ -3,7 +3,7 @@
 //! The vectors ship inside the crate (`vectors/iqa-conformance-v1.2.6.json`).
 //! Every published check is replayed:
 //!   8 positive URIs + 18 fail-closed rejections + 5 action-safety rows
-//!   + 3 closed-set checks (organ / action / standing, RFC-009 sec. 10.1)
+//!   + 3 closed-set checks (organ / action / standing, AICENT-009 sec. 10.1)
 //!   + 1 domain-prefix check
 //!   + 3 envelope checks (canonical signing input, AID self-certification,
 //!     Ed25519 signature).
@@ -14,7 +14,7 @@
 //! can disappear from the report by accident.
 //!
 //! The closed sets are read from the vector and compared with this crate's own
-//! constants. RFC-009 sec. 10.1 freezes them, so an implementation whose set
+//! constants. AICENT-009 sec. 10.1 freezes them, so an implementation whose set
 //! drifted must fail here out loud instead of quietly passing its own tests.
 
 use crate::iqa_uri;
@@ -187,7 +187,7 @@ pub fn run(doc: &Json) -> ConformanceResult {
         }
     }
 
-    // --- closed sets: RFC-009 sec. 10.1 freezes all three --------------------
+    // --- closed sets: AICENT-009 sec. 10.1 freezes all three --------------------
     for (key, ours, label) in [
         (
             "organ_closed_set",

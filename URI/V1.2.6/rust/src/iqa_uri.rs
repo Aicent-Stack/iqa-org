@@ -1,7 +1,7 @@
-//! `iqa://` URI codec — validate, canonicalise, derive (RFC-009 §10/§11).
+//! `iqa://` URI codec — validate, canonicalise, derive (AICENT-009 §10/§11).
 //!
 //! Authority boundaries:
-//!   Grammar ......... RFC-009 §10.2 ABNF (sole authority; no syntax added)
+//!   Grammar ......... AICENT-009 §10.2 ABNF (sole authority; no syntax added)
 //!   Closed sets ..... §10.1 (`organ` and `action` are CLOSED sets — the
 //!                     deliberate difference from `rttp`, whose verb set is open)
 //!   Case discipline . §10.3 (lowercase US-ASCII only) + §12 #8 (fail closed)
@@ -16,16 +16,16 @@ use std::fmt;
 
 pub const SCHEME: &str = "iqa";
 
-/// RFC-009 §10.1 — organ is a CLOSED set (RFC-009-A/-B/-C).
+/// AICENT-009 §10.1 — organ is a CLOSED set (AICENT-009-A/-B/-C).
 pub const ORGANS: [&str; 3] = ["forge", "tss", "gateway"];
 
-/// RFC-009 §10.1 — action is a CLOSED set (differs from `rttp`).
+/// AICENT-009 §10.1 — action is a CLOSED set (differs from `rttp`).
 pub const ACTIONS: [&str; 4] = ["verify", "audit", "attest", "revoke"];
 
-/// RFC-009-C §3 — standings an Organ may render (closed set, lowercase).
+/// AICENT-009-C §3 — standings an Organ may render (closed set, lowercase).
 pub const STANDINGS: [&str; 4] = ["ghost", "probation", "radiant", "genesis"];
 
-/// RFC-009 §10.2 — hash-subject lengths: routing short form / 128-bit / 256-bit.
+/// AICENT-009 §10.2 — hash-subject lengths: routing short form / 128-bit / 256-bit.
 pub const HASH_LENGTHS: [usize; 3] = [8, 32, 64];
 
 /// IQA_ROUTE length in bytes (8 lowercase hex characters).
@@ -55,7 +55,7 @@ pub struct ParsedUri {
     /// The verb; `None` = omitted (§11.1 standing read).
     pub action: Option<String>,
     pub action_omitted: bool,
-    /// RFC-009 §11.3: omitted and `verify` are SAFE; audit/attest/revoke are NOT.
+    /// AICENT-009 §11.3: omitted and `verify` are SAFE; audit/attest/revoke are NOT.
     pub action_safe: bool,
     pub canonical_uri: String,
     /// IQA_ROUTE = SHA-256(ASCII(authority))[0:4], 8 lowercase hex characters.
@@ -101,7 +101,7 @@ pub fn parse(uri: &str) -> Result<ParsedUri, IqaUriError> {
     let rest = uri.strip_prefix(prefix).ok_or_else(|| {
         fail(format!(
             "scheme must be exactly {:?} - no other scheme, no case variant, \
-             no fallback (RFC-009 §10.3, §12 #8)",
+             no fallback (AICENT-009 §10.3, §12 #8)",
             prefix
         ))
     })?;
@@ -116,13 +116,13 @@ pub fn parse(uri: &str) -> Result<ParsedUri, IqaUriError> {
         let c = b as char;
         if "@:?#[]".contains(c) {
             return Err(fail(format!(
-                "{:?} is not defined by the scheme (RFC-009 §10.3)",
+                "{:?} is not defined by the scheme (AICENT-009 §10.3)",
                 c
             )));
         }
         if c.is_ascii_whitespace() {
             return Err(fail(
-                "whitespace is not allowed (RFC-009 §10.3 lowercase US-ASCII only)",
+                "whitespace is not allowed (AICENT-009 §10.3 lowercase US-ASCII only)",
             ));
         }
         return Err(fail(format!(
@@ -153,13 +153,13 @@ pub fn parse(uri: &str) -> Result<ParsedUri, IqaUriError> {
     let segments: Vec<&str> = authority.split('.').collect();
     if segments.len() != 3 {
         return Err(fail(format!(
-            "authority has {} segment(s), must be <subject>.<organ>.<root> (RFC-009 §10.2)",
+            "authority has {} segment(s), must be <subject>.<organ>.<root> (AICENT-009 §10.2)",
             segments.len()
         )));
     }
     let (subject, organ, root) = (segments[0], segments[1], segments[2]);
     if subject.is_empty() || root.is_empty() {
-        return Err(fail("authority segments must be non-empty (RFC-009 §10.2)"));
+        return Err(fail("authority segments must be non-empty (AICENT-009 §10.2)"));
     }
 
     // Subject: hash form (8/32/64 lowercase hex) or name form. Ordered choice
@@ -173,7 +173,7 @@ pub fn parse(uri: &str) -> Result<ParsedUri, IqaUriError> {
     // Organ — CLOSED set, case-sensitive (§10.1). 'Forge', 'forgery' all fail.
     if !ORGANS.contains(&organ) {
         return Err(fail(format!(
-            "organ {:?} is outside the closed set [forge, tss, gateway] (RFC-009 §10.1/§10.3)",
+            "organ {:?} is outside the closed set [forge, tss, gateway] (AICENT-009 §10.1/§10.3)",
             organ
         )));
     }
@@ -182,7 +182,7 @@ pub fn parse(uri: &str) -> Result<ParsedUri, IqaUriError> {
     if let Some(a) = action {
         if !ACTIONS.contains(&a) {
             return Err(fail(format!(
-                "action {:?} is outside the closed set [verify, audit, attest, revoke] (RFC-009 §10.1)",
+                "action {:?} is outside the closed set [verify, audit, attest, revoke] (AICENT-009 §10.1)",
                 a
             )));
         }
@@ -242,7 +242,7 @@ mod tests {
         assert!(parse("iqas://3f9a1b2c.gateway.iqa/audit").is_err());
         assert!(parse("iqa://3f9a1b2c.gateway.iqa/ATTEST").is_err());
         assert!(parse("iqa://subject@iqa.org").is_err());
-        assert!(parse("iqa://iqa.org/RFC-009/").is_err());
+        assert!(parse("iqa://iqa.org/AICENT-009/").is_err());
     }
 
     #[test]

@@ -1,7 +1,7 @@
-// iqa:// URI codec — validate, canonicalise, derive (RFC-009 §10/§11).
+// iqa:// URI codec — validate, canonicalise, derive (AICENT-009 §10/§11).
 //
 // Authority boundaries:
-//   Grammar ......... RFC-009 §10.2 ABNF (sole authority)
+//   Grammar ......... AICENT-009 §10.2 ABNF (sole authority)
 //   Closed sets ..... §10.1 (organ and action are CLOSED sets)
 //   Case discipline . §10.3 (lowercase US-ASCII only) + §12 #8 (fail closed)
 //   Deref safety .... §11.3 (action safety classes)
@@ -13,20 +13,20 @@ import { createHash } from 'node:crypto';
 
 export const SCHEME = 'iqa';
 
-/** RFC-009 §10.1 — organ is a CLOSED set (RFC-009-A/-B/-C). */
+/** AICENT-009 §10.1 — organ is a CLOSED set (AICENT-009-A/-B/-C). */
 export const ORGANS = Object.freeze(['forge', 'tss', 'gateway']);
 
 /**
- * RFC-009 §10.1 — action is a CLOSED set. This is the deliberate difference
+ * AICENT-009 §10.1 — action is a CLOSED set. This is the deliberate difference
  * from `rttp`, whose verb set is open: here anything outside the four verbs
  * is rejected.
  */
 export const ACTIONS = Object.freeze(['verify', 'audit', 'attest', 'revoke']);
 
-/** RFC-009-C §3 — standings an Organ may render (closed set, lowercase). */
+/** AICENT-009-C §3 — standings an Organ may render (closed set, lowercase). */
 export const STANDINGS = Object.freeze(['ghost', 'probation', 'radiant', 'genesis']);
 
-/** RFC-009 §10.2 — hash-subject lengths: routing short form / 128-bit / 256-bit. */
+/** AICENT-009 §10.2 — hash-subject lengths: routing short form / 128-bit / 256-bit. */
 export const HASH_LENGTHS = Object.freeze([8, 32, 64]);
 
 const SAFE = new Set([null, 'verify']); // §11.3: omitted = standing read; verify = read-only
@@ -52,7 +52,7 @@ export function isValidAction(value) {
 /**
  * IQA_ROUTE = SHA-256(ASCII(canonical_authority))[0:4]  (SPEC §3, decision D1).
  *
- * Pure computation, DNS-free (RFC-009 §12 #9). Mirrors the RTTP ROUTE_SHARD
+ * Pure computation, DNS-free (AICENT-009 §12 #9). Mirrors the RTTP ROUTE_SHARD
  * rule so both schemes of the same addressing family derive the same way.
  * NOTE: this is the *address* fingerprint — NOT the subject hash, which is a
  * routing hint for the *AID*. Different numbers about different things.
@@ -80,7 +80,7 @@ export function parse(uri) {
   const prefix = SCHEME + '://';
   if (!uri.startsWith(prefix)) {
     throw fail(uri, `scheme must be exactly ${JSON.stringify(prefix)} - no other `
-      + 'scheme, no case variant, no fallback (RFC-009 §10.3, §12 #8)');
+      + 'scheme, no case variant, no fallback (AICENT-009 §10.3, §12 #8)');
   }
   const rest = uri.slice(prefix.length);
 
@@ -90,10 +90,10 @@ export function parse(uri) {
   for (const ch of rest) {
     if (!ALLOWED.has(ch)) {
       if (FORBIDDEN.has(ch)) {
-        throw fail(uri, `${JSON.stringify(ch)} is not defined by the scheme (RFC-009 §10.3)`);
+        throw fail(uri, `${JSON.stringify(ch)} is not defined by the scheme (AICENT-009 §10.3)`);
       }
       if (/\s/.test(ch)) {
-        throw fail(uri, 'whitespace is not allowed (RFC-009 §10.3 lowercase US-ASCII only)');
+        throw fail(uri, 'whitespace is not allowed (AICENT-009 §10.3 lowercase US-ASCII only)');
       }
       throw fail(uri, `character ${JSON.stringify(ch)} is outside the allowed set `
         + "(lowercase US-ASCII, digits, '-', '.', '/')");
@@ -120,11 +120,11 @@ export function parse(uri) {
   const segments = authority.split('.');
   if (segments.length !== 3) {
     throw fail(uri, `authority has ${segments.length} segment(s), must be `
-      + '<subject>.<organ>.<root> (RFC-009 §10.2)');
+      + '<subject>.<organ>.<root> (AICENT-009 §10.2)');
   }
   const [subject, organ, root] = segments;
   if (subject === '' || root === '') {
-    throw fail(uri, 'authority segments must be non-empty (RFC-009 §10.2)');
+    throw fail(uri, 'authority segments must be non-empty (AICENT-009 §10.2)');
   }
 
   // Subject: hash form (8/32/64 lowercase hex) or name form. Ordered choice
@@ -141,13 +141,13 @@ export function parse(uri) {
   // Organ — CLOSED set, case-sensitive (§10.1). 'Forge', 'forgery', '' all fail.
   if (!ORGANS.includes(organ)) {
     throw fail(uri, `organ ${JSON.stringify(organ)} is outside the closed set `
-      + `[${ORGANS.join(', ')}] (RFC-009 §10.1/§10.3)`);
+      + `[${ORGANS.join(', ')}] (AICENT-009 §10.1/§10.3)`);
   }
 
   // Action — CLOSED set (§10.1). The deliberate difference from rttp.
   if (action !== null && !ACTIONS.includes(action)) {
     throw fail(uri, `action ${JSON.stringify(action)} is outside the closed set `
-      + `[${ACTIONS.join(', ')}] (RFC-009 §10.1)`);
+      + `[${ACTIONS.join(', ')}] (AICENT-009 §10.1)`);
   }
 
   const canonicalUri = SCHEME + '://' + authority + (action ? '/' + action : '');

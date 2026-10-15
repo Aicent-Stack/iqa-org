@@ -4,7 +4,7 @@
 derivation, action safety classes -- and the published conformance vectors that
 prove an implementation is right.**
 
-[RFC-009 sec. 10](https://iqa.org/RFC-009/) - sec. 11 - stack v1.2.6 - zero dependencies - no build step
+[AICENT-009 sec. 10](https://iqa.org/AICENT-009/) - sec. 11 - stack v1.2.6 - zero dependencies - no build step
 
 ---
 
@@ -20,7 +20,7 @@ independent implementation can reproduce from it, so instead of asking you to
 believe a table of numbers, the vectors ship inside the package and replay
 locally -- offline, no account, no network. `[PASS]` or it is not. Every vector file shipped here is listed in `vectors.manifest.json` with its byte count and SHA-256, produced by a generator rather than typed by hand - recompute the hash yourself if you prefer.
 
-The vectors cover the `iqa://` grammar (RFC-009 sec. 10.2), the **closed sets**
+The vectors cover the `iqa://` grammar (AICENT-009 sec. 10.2), the **closed sets**
 (`organ` and `action` -- the deliberate difference from `rttp`, whose verb set
 is open), the sec. 11.3 action safety classes, the `IQA_ROUTE` derivation, **and**
 the deterministic Ed25519 attestation envelope -- replayed by both
@@ -85,7 +85,7 @@ $ node examples/quickstart.mjs
 Its expected output is the route fingerprint the published conformance vectors
 pin for that address, so the example can be **checked** rather than believed.
 
-Addressing is **DNS-free** (RFC-009 sec. 12 #9): the route fingerprint is derived
+Addressing is **DNS-free** (AICENT-009 sec. 12 #9): the route fingerprint is derived
 from the authority by SHA-256, so no registry, resolver or network is
 involved. A URI either yields its fields or throws -- there is no fallback, no
 `iqas`, and no rewriting to `https`.
@@ -94,7 +94,7 @@ involved. A URI either yields its fields or throws -- there is no fallback, no
 
 ## The two closed sets -- the deliberate difference from `rttp`
 
-`rttp` accepts any well-formed action verb. **`iqa` does not.** RFC-009 sec. 10.1
+`rttp` accepts any well-formed action verb. **`iqa` does not.** AICENT-009 sec. 10.1
 marks *both* segments "Closed set", and this package enforces exactly that:
 
 ```js
@@ -106,7 +106,7 @@ parse('iqa://3f9a1b2c.forgery.iqa')        // throws -- organ is forge|tss|gatew
 
 **Malformed input is rejected, not normalised.** `iqa://.../AUDIT`,
 `iqa://3F9A1B2C....` and `IQA://...` all throw: the canonical form is lowercase
-US-ASCII (RFC-009 sec. 10.3), a case variant is not a spelling difference, and
+US-ASCII (AICENT-009 sec. 10.3), a case variant is not a spelling difference, and
 nothing is ever accepted because a check could not be performed.
 
 ### One honest quirk of the grammar
@@ -118,7 +118,7 @@ implementation agrees on it.
 
 ---
 
-## Action safety classes (RFC-009 sec. 11.3)
+## Action safety classes (AICENT-009 sec. 11.3)
 
 | `action` | Class | `action_safe` |
 |:---|:---|:---|
@@ -190,7 +190,7 @@ is what it is for.
 
 ### Why the checker lives in this package, and why that is still honest
 
-`src/conformance.mjs` is written from RFC-009 sec. 10 alone and **must never
+`src/conformance.mjs` is written from AICENT-009 sec. 10 alone and **must never
 import `src/iqa-uri.mjs`**. A conformance suite that reuses the code under
 test only proves the code equals itself. The two files share no code -- one is
 a streaming charset scanner, the other a single full-match grammar check -- so
@@ -207,14 +207,14 @@ starts agreeing with its own bugs.
 
 | | |
 |:---|:---|
-| OK **Validation / canonicalisation** | Real, and specified (RFC-009 sec. 10.2 / sec. 10.3). |
+| OK **Validation / canonicalisation** | Real, and specified (AICENT-009 sec. 10.2 / sec. 10.3). |
 | OK **Closed-set enforcement** | Real, and specified (sec. 10.1). |
 | OK **IQA_ROUTE derivation** | Real (SPEC sec. 3, decision D1). |
 | OK **Action safety classes** | Real, and specified (sec. 11.3). |
 | OK **Conformance vectors + independent replay** | Published and generated. |
-| NO **Dereferencing / resolver service** | Not here. The codec computes; *answering* a standing read is an Organ's job (RFC-009-C sec. 3). |
-| NO **Staking, tiers, vitality** | Operator economics and telemetry -- RFC-009 narrative, no cryptographic object in this package. |
-| NO **Post-quantum Lattice Guard** | RFC-009 sec. 12 #11 schedules it for v1.4.0; no implementation exists. |
+| NO **Dereferencing / resolver service** | Not here. The codec computes; *answering* a standing read is an Organ's job (AICENT-009-C sec. 3). |
+| NO **Staking, tiers, vitality** | Operator economics and telemetry -- AICENT-009 narrative, no cryptographic object in this package. |
+| NO **Post-quantum Lattice Guard** | AICENT-009 sec. 12 #11 schedules it for v1.4.0; no implementation exists. |
 | NO **Revocation transport** | sec. 11.3 defines the verb; executing it is not the codec's job. |
 | NO **Confidentiality** | Signing is not encryption. |
 
@@ -242,11 +242,11 @@ starts agreeing with its own bugs.
   https://datatracker.ietf.org/doc/draft-li-iqa-subject-attestation/ .
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
-* **URI grammar** -- RFC-009 sec. 10.2 (frozen; this package adds no syntax).
-* **Dereference safety** -- RFC-009 sec. 11 (closed sets and safety classes).
+* **URI grammar** -- AICENT-009 sec. 10.2 (frozen; this package adds no syntax).
+* **Dereference safety** -- AICENT-009 sec. 11 (closed sets and safety classes).
 * **Attestation envelope** -- `SPEC/IQA-URI-ATTEST-v1.2.6.md` sec. 5, a **draft**:
   the format is implemented and vector-tested, but it is not yet a numbered
-  RFC-009 section.
+  AICENT-009 section.
 
 Where this package and the specification disagree, **the specification wins
 and this package is wrong.** Please report it.

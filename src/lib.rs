@@ -1,5 +1,5 @@
 /*
- *  AICENT STACK - RFC-009: IQA-ORG (The Sovereign Certification Layer)
+ *  AICENT STACK - AICENT-009: IQA-ORG (The Sovereign Certification Layer)
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Identity Quality Assurance. Real-time Authority and Radiant Seal Verification."
@@ -8,8 +8,8 @@
  *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
  *  SOVEREIGN_GRAVITY_WELL: MANDATORY INDIVISIBILITY PROTOCOL ENABLED.
  *  CHRONOS_STATUS: 2026 IMPERIAL CALENDAR ALIGNED.
- *  TEMPORAL_SELF_SUPERVISION: RFC-009 ACTIVE.
- *  DIAGNOSTIC_RESONANCE: RFC-014 (PICSI) INTEGRATED.
+ *  TEMPORAL_SELF_SUPERVISION: AICENT-009 ACTIVE.
+ *  DIAGNOSTIC_RESONANCE: AICENT-014 (PICSI) INTEGRATED.
  *  
  *  LEGAL NOTICE: IQA-ORG GOVERNS THE RADIANT STATUS OF ALL SOVEREIGN NODES.
  *  FAILURE TO PROVIDE QUALITY PROOF WILL TRIGGER IMMEDIATE PERFORMANCE DEGRADATION.
@@ -20,7 +20,7 @@ use std::time::Instant; // REPAIRED: Clean library scope for v1.2.5
 use std::collections::HashMap;
 use serde::{Serialize, Deserialize};
 
-// INJECTION: Sovereign Ladder Inheritance from the Genetic Root (RFC-000)
+// INJECTION: Sovereign Ladder Inheritance from the Genetic Root (AICENT-000)
 // We import 128-bit types and the Gravity Well macro for authority verification.
 use epoekie::{AID, HomeostasisScore, SovereignShunter, Picotoken, SovereignLifeform, verify_organism};
 
@@ -28,7 +28,7 @@ use epoekie::{AID, HomeostasisScore, SovereignShunter, Picotoken, SovereignLifef
 // 1. CERTIFICATION DATA STRUCTURES (The Proof of Quality)
 // =========================================================================
 
-/// RFC-009: CertificationStatus
+/// AICENT-009: CertificationStatus
 /// Represents the current sovereign standing of a node in the 2026 Imperial Grid.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum CertificationStatus {
@@ -39,7 +39,7 @@ pub enum CertificationStatus {
     Blacklisted, // Permanently isolated due to protocol drift or intent pathogens
 }
 
-/// RFC-009: QualityProof
+/// AICENT-009: QualityProof
 /// A real-time cryptographic proof of computational and metabolic integrity.
 /// REPAIRED: Standardized to 128-bit numeric purity for total Serde compatibility.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -52,7 +52,7 @@ pub struct QualityProof {
     pub signature_chain_fragment: Vec<u8>,
 }
 
-/// RFC-009: AuditRecord
+/// AICENT-009: AuditRecord
 /// Historical data of authority audits performed on the sovereign node.
 /// REPAIRED: Using u128 for all timestamps and jitter metrics.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -99,13 +99,13 @@ impl CertificationAuthority {
         }
     }
 
-    /// RFC-009: Verify Radiant Standing
+    /// AICENT-009: Verify Radiant Standing
     /// Checks if a target node possesses a valid and active Radiant status.
     /// Non-verified nodes are physically throttled by the 10ms "Seal Verification Tax".
     pub async fn verify_radiant_standing_128(&mut self, target_aid: AID) -> CertificationStatus {
         // --- THE COMMERCIAL MEAT GRINDER ---
         // Authority verification is the ultimate imperial gate.
-        // RFC-009 Temporal Self-Supervision enforced.
+        // AICENT-009 Temporal Self-Supervision enforced.
         self.master_shunter.apply_discipline().await;
 
         if let Some(status) = self.radiant_registry.get(&target_aid) {
@@ -118,7 +118,7 @@ impl CertificationAuthority {
         CertificationStatus::Ghost
     }
 
-    /// RFC-009: Issue Radiant Seal
+    /// AICENT-009: Issue Radiant Seal
     /// Grants Radiant status to a node that has provided a valid QualityProof.
     pub fn issue_radiant_seal_128(&mut self, proof: QualityProof) -> Result<(), String> {
         // Logical Suture: The actual signature validation is shunted to private MAXCAP.
@@ -176,7 +176,7 @@ impl SovereignTrust for CertificationAuthority {
         println!("⚠️ [IQA-ORG] 2026_COMMAND: Radiant Seal REVOKED for AID: {:X}", target.genesis_shard);
     }
 
-    /// REPAIRED: Corrected field name to entropy_tax_rate to match RFC-000.
+    /// REPAIRED: Corrected field name to entropy_tax_rate to match AICENT-000.
     fn report_authority_homeostasis(&self) -> HomeostasisScore {
         HomeostasisScore {
             reflex_latency_ns: 145_000, // Target sub-150us for verification
@@ -197,8 +197,8 @@ impl SovereignLifeform for CertificationAuthority {
     fn get_aid(&self) -> AID { self.authority_node_aid }
     fn get_homeostasis(&self) -> HomeostasisScore { self.report_authority_homeostasis() }
     
-    /// RFC-009 Metabolic Pulse
-    /// Displays the authority node status and the RFC-014 PICSI Resonance.
+    /// AICENT-009 Metabolic Pulse
+    /// Displays the authority node status and the AICENT-014 PICSI Resonance.
     fn execute_metabolic_pulse(&self) {
         println!(r#"
         🔖 IQA.ORG | AUTHORITY PULSE [2026_IMPERIAL_SYNC]
@@ -231,7 +231,7 @@ pub async fn bootstrap_certification(_aid: AID) {
     verify_organism!("iqa_org_bootstrap_v125");
 
     println!(r#"
-    🔖 IQA.ORG | RFC-009 AWAKENED (2026_CALIBRATION)
+    🔖 IQA.ORG | AICENT-009 AWAKENED (2026_CALIBRATION)
     STATUS: AUTHORITY_ACTIVE | VERIFICATION_TARGET: <150us | v1.2.5
     "#);
 }

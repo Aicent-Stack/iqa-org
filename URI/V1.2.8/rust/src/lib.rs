@@ -1,6 +1,6 @@
 //! # iqa-org -- Rust reference implementation of IQA (v1.2.6)
 //!
-//! `iqa://` subject-attestation addressing, `IQA_ROUTE` derivation, RFC-009
+//! `iqa://` subject-attestation addressing, `IQA_ROUTE` derivation, AICENT-009
 //! sec. 11.3 action safety classes, and the published conformance vectors that
 //! prove an implementation is right -- replayed offline, `[PASS]` or it is not.
 //!
@@ -32,7 +32,7 @@
 //!
 //! ## The two closed sets -- the deliberate difference from `rttp`
 //!
-//! `organ` and `action` are closed sets (RFC-009 sec. 10.1). A codec ported from
+//! `organ` and `action` are closed sets (AICENT-009 sec. 10.1). A codec ported from
 //! `rttp`, whose verb set is open, is non-conformant for `iqa`:
 //!
 //! ```
@@ -43,7 +43,7 @@
 //!
 //! ## Authority
 //!
-//! Grammar: RFC-009 sec. 10.2 ABNF. Dereference safety: RFC-009 sec. 11.3. The `iqa`
+//! Grammar: AICENT-009 sec. 10.2 ABNF. Dereference safety: AICENT-009 sec. 11.3. The `iqa`
 //! URI scheme is submitted to IANA under RFC 7595 (ticket #1459963,
 //! Provisional) and is **under review -- not yet registered**. Where this crate
 //! and the specification disagree, **the specification wins and this crate is
