@@ -171,10 +171,8 @@ does not **create** one (AICENT-009 sec. 10.4: parsing is not attestation).
 
 ## Specification status
 
-* **`iqa` URI scheme** -- submitted to IANA under RFC 7595, ticket **#1459963**:
-  the scheme **name is approved**; the CRI number is in expert review. It is
-  **not yet registered**. Please describe it that way. (The sibling `rttp`
-  scheme **is** registered: Provisional, CRI 27.)
+* **`iqa` URI scheme** -- **registered**: IANA "URI Schemes" registry,
+  Provisional, **CRI 28** (2026-10-13), submitted under RFC 7595.
 * **Internet-Draft (IETF)** -- under IETF review as the combined Individual
   Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -00,
   16 pp., 2026-09-24, informational -- both schemes, one document):
