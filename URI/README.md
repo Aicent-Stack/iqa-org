@@ -172,7 +172,8 @@ does not **create** one (AICENT-009 sec. 10.4: parsing is not attestation).
 ## Specification status
 
 * **`iqa` URI scheme** -- **registered**: IANA "URI Schemes" registry,
-  Provisional, **CRI 28** (2026-10-13), submitted under RFC 7595.
+  Provisional, **CRI 28** (2026-10-13), submitted under RFC 7595. (The sibling `rttp`
+  scheme **is** registered: Provisional, CRI 27.)
 * **Internet-Draft (IETF)** -- under IETF review as the combined Individual
   Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -00,
   16 pp., 2026-09-24, informational -- both schemes, one document):
