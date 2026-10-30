@@ -5,6 +5,10 @@ derivation, AICENT-009 sec. 11.3 action safety classes, the AE-128 fixed
 attestation envelope -- and the published conformance vectors that prove an
 implementation is right.**
 
+In the two-scheme line: `iqa` states **whether**; the sibling
+[`rttp`](https://github.com/Aicent-Stack/rttp) crate's `rttp` scheme resolves
+**where & when** -- and where the two agree, action begins.
+
 [AICENT-009 sec. 10](https://iqa.org/AICENT-009/) - sec. 11 - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
 
 ---
@@ -174,9 +178,9 @@ does not **create** one (AICENT-009 sec. 10.4: parsing is not attestation).
 * **`iqa` URI scheme** -- **registered**: IANA "URI Schemes" registry,
   Provisional, **CRI 28** (2026-10-13), submitted under RFC 7595. (The sibling `rttp`
   scheme **is** registered: Provisional, CRI 27.)
-* **Internet-Draft (IETF)** -- under IETF review as the combined Individual
-  Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -00,
-  16 pp., 2026-09-24, informational -- both schemes, one document):
+* **Internet-Draft (IETF)** -- in Independent Submission (ISE) review as the
+  combined Internet-Draft `draft-li-rttp-iqa-addressing` (revision -01,
+  34 pp., 2026-10-27, informational -- both schemes, one document):
   https://datatracker.ietf.org/doc/draft-li-rttp-iqa-addressing/ .
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
@@ -184,14 +188,33 @@ does not **create** one (AICENT-009 sec. 10.4: parsing is not attestation).
 * **Dereference safety** -- AICENT-009 sec. 11 (closed sets and safety classes);
   the four-state standing vocabulary is normative since v1.2.9, sec. 11.1.1.
 * **Attestation envelope** -- `SPEC/IQA-URI-ATTEST-v1.2.6.md` sec. 5, a **draft**.
-* **AE-128** -- companion draft v0.3 (`ae128-draft-v0.3.md`): implemented here
-  to the byte against the published vector. A roadmap artifact of the
-  specification line; it creates no IANA/ISE obligations.
+* **AE-128** -- specified as a normative wire format in the I-D (revision
+  -01, sec. 7.2); implemented here to the byte against the published vector.
 
 Where this crate and a specification disagree, **the specification wins and
 the crate is wrong.** Please report it.
 
 ---
+
+## Notes on revision -01 (2026-10-30)
+
+Revision -01 of the combined Internet-Draft (see "Specification status"
+above) adds two things consumers of this crate should know about:
+
+1. **sec. 8 -- the closed refusal vocabulary with grant references.**
+   Denial reasons form a closed set (`evidence_binding_mismatch`,
+   `evidence_expired`, `authority_not_determined`, `authority_revoked`,
+   `operation_not_permitted`), and each refusal carries a grant
+   reference. Fail-closed results from `envelope::verify` and the URI
+   codec are asked to surface using that vocabulary, so that independent
+   implementations reject with the same words.
+2. **sec. 6 -- the trust lease.** Freshness is checked against the
+   verifier's own clock; deployments use 120 seconds, and the window
+   `MAY` be configured. The Ed25519 attestation envelope's 120-second
+   freshness default follows this section.
+
+Where this crate and the I-D disagree, **the I-D wins and the crate is
+wrong.** Please report it.
 
 ## License
 
