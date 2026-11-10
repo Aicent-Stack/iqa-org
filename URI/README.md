@@ -5,7 +5,7 @@ derivation, AICENT-009 sec. 11.3 action safety classes, the AE-128 fixed
 attestation envelope -- and the published conformance vectors that prove an
 implementation is right.**
 
-[AICENT-009 sec. 10](https://iqa.org/AICENT-009/) - sec. 11 - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
+[AICENT-009 sec. 10](https://iqa.org/URI/) - sec. 11 - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
 
 ---
 
@@ -32,7 +32,7 @@ authentication tamper matrix. Offline, no account, no network.
 
 The three implementations -- Python (`pip install iqa-org`), JavaScript
 (`npm install @aicent/iqa`), and this one -- **share no code** and agree byte
-for byte on the same published vector set (`sha256 8529549e...`, shipped in all
+for byte on the same published vector set (`sha256 68bf2a9a...`, shipped in all
 of them) and on the AE-128 vector (`4bd14b6a...`).
 
 ---
@@ -131,7 +131,7 @@ Python and JavaScript implementations.
 ### Attestation envelope (feature `ed25519`)
 
 ```toml
-iqa-org = { version = "1.3.1", features = ["ed25519"] }
+iqa-org = { version = "1.3.2", features = ["ed25519"] }
 ```
 
 Ed25519, self-certifying (`AID = SHA-256(public key)`), domain prefix
@@ -151,7 +151,7 @@ does not **create** one (AICENT-009 sec. 10.4: parsing is not attestation).
 | OK **IQA_ROUTE derivation** | Real (SPEC sec. 3, decision D1). |
 | OK **Action safety classes** | Real, and specified (sec. 11.3). |
 | OK **Attestation envelope** | Real, and specified (draft) -- feature `ed25519`. |
-| OK **AE-128 fixed envelope** | Real, and specified (companion draft v0.3) -- default build, zero dependencies. |
+| OK **AE-128 fixed envelope** | Real, and specified (draft-02 sec. 7.2) -- default build, zero dependencies. |
 | NO **Dereferencing / resolver service** | Not here. The codec computes; *answering* a standing read is an Organ's job (AICENT-009-C sec. 3). |
 | NO **Staking, tiers, vitality** | Operator economics and telemetry -- AICENT-009 narrative, no cryptographic object here. |
 | NO **Post-quantum Lattice Guard** | AICENT-009 sec. 12 #11 schedules it for v1.4.0; no implementation exists. |
@@ -163,7 +163,7 @@ does not **create** one (AICENT-009 sec. 10.4: parsing is not attestation).
 
 | Ecosystem | Name | Status |
 |:---|:---|:---|
-| crates.io | `iqa-org` | **this crate** -- `1.3.1`, the first formal (non-pre-release) publication; the earlier `1.2.8-alpha` remains published and is not yanked |
+| crates.io | `iqa-org` | **this crate** -- `1.3.2`; the first formal (non-pre-release) publication was `1.3.1`; the earlier `1.2.8-alpha` remains published and is not yanked |
 | PyPI | **`iqa-org`** | **published** -- the Python reference implementation; `pip install iqa-org` (`import iqa`) |
 | npm | **`@aicent/iqa`** | **published** -- the JavaScript independent implementation |
 
@@ -172,21 +172,27 @@ does not **create** one (AICENT-009 sec. 10.4: parsing is not attestation).
 ## Specification status
 
 * **`iqa` URI scheme** -- **registered**: IANA "URI Schemes" registry,
-  Provisional, **CRI 28** (2026-10-13), submitted under RFC 7595. (The sibling `rttp`
-  scheme **is** registered: Provisional, CRI 27.)
+  Provisional, **CRI 28** (2026-10-13), submitted under RFC 7595
+  (ticket **#1459963**). (The sibling `rttp` scheme is registered:
+  Provisional, CRI 27.)
 * **Internet-Draft (IETF)** -- under IETF review as the combined Individual
-  Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -00,
-  16 pp., 2026-09-24, informational -- both schemes, one document):
+  Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -02,
+  40 pp., 2026-11-01, informational -- both schemes, one document):
   https://datatracker.ietf.org/doc/draft-li-rttp-iqa-addressing/ .
+  TXT sha256 `02491c5a59d1e7471be04e8e0d4933dfc22ce19f9b054ead0aa449d6b4485044`.
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
+* **Conformance records** -- sealed runs and vector families:
+  https://iqa.org/conformance/ ; the published vector sets are pinned at
+  https://iqa.org/challenge/ .
 * **URI grammar** -- AICENT-009 sec. 10.2 (frozen; this crate adds no syntax).
 * **Dereference safety** -- AICENT-009 sec. 11 (closed sets and safety classes);
   the four-state standing vocabulary is normative since v1.2.9, sec. 11.1.1.
 * **Attestation envelope** -- `SPEC/IQA-URI-ATTEST-v1.2.6.md` sec. 5, a **draft**.
-* **AE-128** -- companion draft v0.3 (`ae128-draft-v0.3.md`): implemented here
-  to the byte against the published vector. A roadmap artifact of the
-  specification line; it creates no IANA/ISE obligations.
+* **AE-128** -- normative layout: draft-li-rttp-iqa-addressing-02 sec. 7.2
+  (incorporated into the I-D; re-anchored 2026-11-09). The companion draft
+  v0.3 (`ae128-draft-v0.3.md`) remains the historical parameter sheet.
+  Implemented here to the byte against the published vector.
 
 Where this crate and a specification disagree, **the specification wins and
 the crate is wrong.** Please report it.
